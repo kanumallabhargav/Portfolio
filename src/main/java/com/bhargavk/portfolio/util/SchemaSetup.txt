@@ -1,0 +1,18 @@
+CREATE TABLE stats' (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `gain` int NOT NULL,
+    `spent` int NOT NULL,
+    `protein` int NOT NULL,
+    `net_gain` int NOT NULL,
+    `total_deficit` int NOT NULL,
+    `stat_date` date NOT NULL DEFAULT(CURRENT_DATE)
+);
+
+CREATE TABLE `history` (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `tfl` int NOT NULL,
+    `cl` double NOT NULL,
+    `rl` double NOT NULL,
+    `eta` double NOT NULL,
+    `stat_date` date NOT NULL DEFAULT(CURRENT_DATE)
+);

@@ -21,15 +21,15 @@ public class History {
     @Column(name = "tfl")
     private Integer totalFatLoss;
 
-    @Column(name = "cl")
+    @Column(name = "cl", nullable = false)
     private double currentLoss;
 
-    @Column(name = "rl")
+    @Column(name = "rl", nullable = false)
     private double remainingLoss;
 
-    @Column(name = "eta")
+    @Column(name = "eta", nullable = false)
     private double eta;
 
-    @Column(name = "stat_date")
+    @Column(name = "stat_date", nullable = false)
     private LocalDate statDate;
 }
