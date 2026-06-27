@@ -5,7 +5,6 @@ import heroImg from './assets/hero.png'
 import Stats from './components/Stats'
 import Header from './components/Header'
 import Body from './components/Body'
-import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +13,6 @@ function App() {
     <>
     <Header />
       <Body />
-      <Footer />
     </>
   )
 }
