@@ -21,7 +21,7 @@ export default function Calc() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setNet(formData.gain-formData.spent)
-        setRemaining(2500-formData.gain)
+        setRemaining(2500-(formData.gain-formData.spent))
         setIsEnabled(true)
         setFormData({
             gain: "",
