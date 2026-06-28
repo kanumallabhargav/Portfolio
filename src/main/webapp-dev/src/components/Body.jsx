@@ -8,7 +8,6 @@ export default function Body() {
     const [selectedTopic, setSelectedTopic] = useState('profile');
     function clickHandler(selectedButton) {
         setSelectedTopic(selectedButton);
-        setClassName('');
     }
 
 
