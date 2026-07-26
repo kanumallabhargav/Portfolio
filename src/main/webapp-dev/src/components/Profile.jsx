@@ -87,7 +87,7 @@ export default function Profile() {
                     <img src={ProfilePhoto} alt="Company Logo" width="300" />
                 </div>
             </div>
-            <div className="text-white col-span-4 ml-28 bg-slate-300/40 mr-12 rounded-lg h-[43rem] shadow-2xl">
+            <div className="text-white col-span-4 ml-28 lg:ml-36 lg:mr-3 bg-slate-300/40 mr-12 rounded-lg h-[43rem] shadow-2xl">
                 {!selectedTopic ? <About /> : <ProfileContentHelper
                     selectedTopic={selectedTopic} />}
             </div>
