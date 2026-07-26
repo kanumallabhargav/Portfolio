@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CTCHistoryChart from "./CTCHistoryChart";
 
 
 export default function Tenure() {
@@ -161,6 +162,10 @@ export default function Tenure() {
                     <li className="pl-3">Been a QA for 5Y 16D / 1843D</li>
                     <li className="pl-3">Officially a <span className="bg-red-500/70 text-white font-semibold px-1.5 rounded-md">Full Stack Developer</span> from 1 Mar 2026</li>
                 </ul>
+            </div>
+            <p className="border-l-2 px-4 ml-4 font-semibold bg-purple-900/20 w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-white">CTC History</p>
+            <div className="">
+                <CTCHistoryChart />
             </div>
         </>
     );
