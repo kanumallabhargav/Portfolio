@@ -8,6 +8,7 @@ export default function Stats() {
     const [change, setChange] = useState(false);
     const [refresh, setRefresh] = useState(1);
     const [rowCount, setRowCount] = useState(0)
+    const [calcLoss, setCalcLoss] = useState(0);
     const [formData, setFormData] = useState({
         gain: "",
         spent: "",
@@ -26,6 +27,17 @@ export default function Stats() {
             .then((response) => {
                 setStats(response.data);
                 setRowCount(response.data.length)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [refresh]);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8080/api/stats/getNewTfl")
+            .then((response) => {
+                setCalcLoss(response.data)
             })
             .catch((error) => {
                 console.error(error);
@@ -203,11 +215,12 @@ export default function Stats() {
                     <p className="text-center text-sm text-zinc-300/70">kg</p>
                 </div>
                 <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
-                    <p className="text-center text-zinc-300/70 text-xl">ETA</p>
+                    <p className="text-center text-zinc-300/70 text-xl">Adjusted Loss</p>
                     <p className="text-center text-5xl">
-                        {(((77000 * rowCount)/tfl).toFixed())-13}
+                        {/* {(((77000 * rowCount)/tfl).toFixed())-13} */}
+                        {calcLoss}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70">days</p>
+                    <p className="text-center text-sm text-zinc-300/70">kg</p>
                 </div>
             </div>
         </div>
