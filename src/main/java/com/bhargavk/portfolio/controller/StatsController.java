@@ -33,4 +33,9 @@ public class StatsController {
         historyService.saveHistoryItem(stats);
         return ResponseEntity.status(HttpStatus.CREATED).body("Created record");
     }
+
+    @GetMapping("/getNewTfl")
+    public String getNewTFL() {
+        return statsService.calculateNewTFL();
+    }
 }

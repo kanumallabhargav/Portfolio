@@ -41,4 +41,15 @@ public class StatsService {
     public List<Integer> getAllSpends() {
         return statsRepository.getAllSpent();
     }
+
+    public String calculateNewTFL() {
+               long d =  statsRepository.getAllDeficits()
+                        .stream()
+                        .mapToInt(Integer::intValue)
+                        .sum() - (
+                                statsRepository.getTotalRows()
+                                        * 500);
+
+        return String.format("%.2f", (float) (d * 10) / 77000);
+    }
 }

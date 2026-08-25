@@ -15,6 +15,9 @@ public interface StatsRepository extends JpaRepository<Stats, Long> {
     @Query("SELECT s.spent FROM Stats s")
     public List<Integer> getAllSpent();
 
+    @Query("SELECT s.totalDeficit FROM Stats s")
+    public List<Integer> getAllDeficits();
+
     @Query("SELECT count(s) from Stats s")
     public long getTotalRows();
 
