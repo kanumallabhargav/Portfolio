@@ -20,7 +20,7 @@ public class ChartsService {
     private final StatsRepository statsRepository;
 
     public Map<LocalDate, Integer> getDeficitTrends() {
-        List<GainSpendTrendDTO> rawGains = statsRepository.getGainSpendTrendData();
+        List<GainSpendTrendDTO> rawGains = statsRepository.getGainSpendTrendData(LocalDate.of(2026, 8, 1));
 
         Map<LocalDate, Integer> trendMap = new HashMap<>();
 
@@ -32,7 +32,7 @@ public class ChartsService {
     }
 
     public List<GainSpendTrendDTO> getGainSpendTrendData() {
-        return statsRepository.getGainSpendTrendData();
+        return statsRepository.getGainSpendTrendData(LocalDate.of(2026, 8, 1));
     }
 
     public int getTflValue() {
@@ -48,12 +48,12 @@ public class ChartsService {
                 .sum();
 
         int currentDayCounter = (int) statsRepository.getTotalRows();
-        int requiredIntake = (int) (2500 * currentDayCounter);
+        int requiredIntake = (2500 * currentDayCounter);
         return requiredIntake - (totalGains-totalSpent);
     }
 
     public List<NetGainChartDTO> calcNetGains() {
-        List<GainSpendTrendDTO> trends = statsRepository.getGainSpendTrendData();
+        List<GainSpendTrendDTO> trends = statsRepository.getGainSpendTrendData(LocalDate.of(2026, 8, 1));
 
         List<NetGainChartDTO> toReturn = new ArrayList<>();
         for(int i=0; i<= trends.size()-1;i++) {

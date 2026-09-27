@@ -16,22 +16,21 @@ export default function Header() {
     });
   };
 
-    return <>
-        <div className="bg-red-400/50 text-zinc-300 font-semibold
+    return <div className="bg-red-400/50 text-zinc-300 font-semibold
                     mx-12 mt-3 px-10 h-8
-                    rounded-full 
-                    fixed top-0 inset-x-0 z-50 
+                    rounded-full
+                    fixed top-0 inset-x-0 z-50
                     flex items-center text-xl justify-between">
             <p>Portfolio</p>
             <div className='pt-1.5'>
-                <button className='mr-1.5 
-                        hover:bg-red-400/30 active:bg-red-400/20 
+                <button className='mr-1.5
+                        hover:bg-red-400/30 active:bg-red-400/20
                         rounded-full p-0.5'
                         onClick={scrollToTop}
                         >
                     <IconUpArrow />
                 </button>
-                <button className='hover:bg-red-400/30 active:bg-red-400/20 
+                <button className='hover:bg-red-400/30 active:bg-red-400/20
                         rounded-full p-0.5'
                         onClick={scrollToBottom}
                         >
@@ -39,5 +38,4 @@ export default function Header() {
                 </button>
             </div>
         </div>
-    </>
 }
