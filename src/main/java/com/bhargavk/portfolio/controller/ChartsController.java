@@ -40,7 +40,6 @@ public class ChartsController {
                                 entry.getKey(),
                                 entry.getValue()
                         )
-
                 )
                 .toList());
         Collections.reverse(response);
