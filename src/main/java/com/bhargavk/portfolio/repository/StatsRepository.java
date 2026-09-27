@@ -23,9 +23,6 @@ public interface StatsRepository extends JpaRepository<Stats, Long> {
     @Query("SELECT count(s) from Stats s")
     long getTotalRows();
 
-    @Query("SELECT s.statDate, s.gain, s.spent from Stats s")
-    List<GainSpendTrendDTO> getGainSpendTrendData();
-
     @Query("""
                 SELECT s.statDate, s.gain, s.spent
                 FROM Stats s

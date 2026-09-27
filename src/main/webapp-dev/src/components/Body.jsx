@@ -1,6 +1,5 @@
 import Profile from "./Profile";
-import Stats from "./Stats";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import TabButton from "./TabButton";
 import ContentHelper from "./ContentHelper";
 
@@ -9,9 +8,6 @@ export default function Body() {
     function clickHandler(selectedButton) {
         setSelectedTopic(selectedButton);
     }
-
-
-   
 
     return (
         <div className="mx-48 my-24 bg-slate-800/60 rounded-xl p-12">

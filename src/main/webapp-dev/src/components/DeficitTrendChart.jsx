@@ -19,7 +19,6 @@ const DeficitTrendChart = () => {
     }, []);
 
     return (
-        <>
             <AreaChart
                 width=''
                 height={400}
@@ -38,7 +37,6 @@ const DeficitTrendChart = () => {
                     fill='#8F7833'
                     type="monotone" />
             </AreaChart>
-        </>
     )
 }
 

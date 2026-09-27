@@ -19,7 +19,6 @@ const GainSpendChart = () => {
     }, []);
 
     return (
-        <>
             <BarChart
                 width=''
                 height={400}
@@ -43,7 +42,6 @@ const GainSpendChart = () => {
                     fill='#94FFAA'
                     type="monotone" />
             </BarChart>
-        </>
     )
 }
 

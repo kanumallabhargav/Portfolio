@@ -30,7 +30,7 @@ public class HistoryService {
     public void saveHistoryItem(Stats stats) {
 
         int currentDayCounter = (int) statsRepository.getTotalRows();
-        int requiredIntake = (int) (2500 * currentDayCounter);
+        int requiredIntake = (2500 * currentDayCounter);
         int totalSpent = addListItems(statsRepository.getAllSpent());
         int totalGains = addListItems(statsRepository.getAllGains());
         int totalFatLoss = requiredIntake - (totalGains-totalSpent);

@@ -1,5 +1,9 @@
 package com.bhargavk.portfolio.util;
 
 public class Constants {
-    public static final int bmr = 2500;
+    private Constants() {
+        /* This utility class should not be instantiated */
+    }
+
+    public static final int BMR = 2500;
 }

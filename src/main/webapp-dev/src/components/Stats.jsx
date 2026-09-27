@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IconCharts } from "../assets/static/Icons";
 
 export default function Stats() {
 
     const [stats, setStats] = useState([]);
-    const [change, setChange] = useState(false);
     const [refresh, setRefresh] = useState(1);
     const [rowCount, setRowCount] = useState(0)
     const [calcLoss, setCalcLoss] = useState(0);
