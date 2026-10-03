@@ -30,4 +30,16 @@ public interface StatsRepository extends JpaRepository<Stats, Long> {
                             order by s.statDate
             """)
     List<GainSpendTrendDTO> getGainSpendTrendData(@Param("statDate") LocalDate statDate);
+
+    @Query("SELECT sum(s.gain) from Stats s WHERE s.statDate >= :weekDate")
+    Integer getWeeklyGain(@Param("weekDate") LocalDate weekDate);
+
+    @Query("SELECT sum(s.spent) from Stats s WHERE s.statDate >= :weekDate")
+    Integer getWeeklySpent(@Param("weekDate") LocalDate weekDate);
+
+    @Query("SELECT sum(s.netGain) from Stats s WHERE s.statDate >= :weekDate")
+    Integer getWeeklyNetGains(@Param("weekDate") LocalDate weekDate);
+
+    @Query("SELECT sum(s.totalDeficit) from Stats s WHERE s.statDate >= :weekDate")
+    Integer getWeeklyDeficit(@Param("weekDate") LocalDate weekDate);
 }
