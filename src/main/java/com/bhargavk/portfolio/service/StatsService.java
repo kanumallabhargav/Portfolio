@@ -28,7 +28,7 @@ public class StatsService {
     @Transactional
     public void saveStat(Stats stats) {
         int netGain = stats.getGain() - stats.getSpent();
-        int totalDeficit = Constants.bmr - netGain;
+        int totalDeficit = Constants.BMR - netGain;
         stats.setNetGain(netGain);
         stats.setTotalDeficit(totalDeficit);
         statsRepository.save(stats);

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CTCHistoryChart from "./CTCHistoryChart";
 
 
@@ -155,7 +154,7 @@ export default function Tenure() {
             </div>
             <p className="border-l-2 px-4 ml-4 font-semibold bg-purple-900/20 w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-white">Trivia</p>
             <div className="text-zinc-200/70 bg-zinc-900/40 py-8 px-28 rounded-lg">
-                <ul class="list-['❯❯'] pl-5 marker:text-red-400/70">
+                <ul className="list-['❯❯'] pl-5 marker:text-red-400/70">
                     <li className="pl-3"><span className="bg-purple-800/80 text-white font-semibold px-1.5 rounded-md">Zen3</span> Record break on 8 Sep 2025</li>
                     <li className="pl-3"><span className="bg-purple-800/80 text-white font-semibold px-1.5 rounded-md">Sportsplus</span> Record break on 28 Feb 2026</li>
                     <li className="pl-3">Worked in <span className="bg-purple-800/80 text-white font-semibold px-1.5 rounded-md">CShare</span> as a QA for exactly the same number of days as total Sportsplus tenure</li>

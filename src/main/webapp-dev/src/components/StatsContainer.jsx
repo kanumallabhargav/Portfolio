@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { IconCalc, IconCharts, IconData, IconHistory } from "../assets/static/Icons";
+import {IconCalc, IconCharts, IconData, IconHistory, IconReports, IconTerminal} from "../assets/static/Icons";
 import Stats from "./Stats";
 import Charts from "./Charts";
 import Calc from "./Calc";
 import History from "./History";
+import Reports from "./Reports.jsx";
+import Terminal from "./Terminal.jsx";
 
 export default function StatsContainer() {
     const [statView, setStatView] = useState('data')
@@ -16,7 +18,9 @@ export default function StatsContainer() {
         data: <Stats />,
         charts: <Charts />,
         calc: <Calc />,
-        history: <History />
+        history: <History />,
+        reports: <Reports />,
+        terminal: <Terminal />
     }
 
     const [selectedValue, setSelectedValue] = useState('v1');
@@ -65,6 +69,22 @@ export default function StatsContainer() {
                 `}
                 onClick={() => { handleTabViewClick('history') }}>
                 <IconHistory />
+            </button>
+            <button
+                className={`
+                    hover:border-yellow-300 p-1 mr-3 mb-4 rounded-md
+                    ${statView === 'reports' ? 'bg-purple-800/80' : 'bg-transparent'}
+                `}
+                onClick={() => { handleTabViewClick('reports') }}>
+                <IconReports />
+            </button>
+            <button
+                className={`
+                    hover:border-yellow-300 p-1 mr-3 mb-4 rounded-md
+                    ${statView === 'terminal' ? 'bg-purple-800/80' : 'bg-transparent'}
+                `}
+                onClick={() => { handleTabViewClick('terminal') }}>
+                <IconTerminal />
             </button>
             {currentTabView[statView]}
         </div>
