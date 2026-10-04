@@ -30,6 +30,12 @@ public class ReportsService {
         if(maxCounterValue.getFirst()!=null &&
                 DateUtils.getCurrentWeek() > maxCounterValue.getFirst()+1) {
 
+            if(!statsRepository.getLastUpdatedDate().equals(DateUtils.yesterday())) {
+                log.warn("Yesterday's stats are not updated.");
+                log.warn("Update yesterday's stats and restart the application.");
+                return;
+            }
+
             log.info("Updating weekly stats now...");
 
             WeeklyStats weeklyStats = new WeeklyStats();
@@ -46,7 +52,9 @@ public class ReportsService {
 
             weeklyStatsRepository.save(weeklyStats);
             log.info("Stats updated for week: {}", DateUtils.getCurrentWeek());
+            return;
         }
+        log.info("Skipping weekly stat update...");
         log.info("Stats will be updated at the beginning of a new week.");
     }
 
