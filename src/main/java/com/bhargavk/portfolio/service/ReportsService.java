@@ -27,25 +27,30 @@ public class ReportsService {
 
         List<Integer> maxCounterValue = weeklyStatsRepository.getLastUpdatedWeek();
 
-        if(DateUtils.getCurrentWeek() > maxCounterValue.getFirst()) {
+        if(maxCounterValue.getFirst()!=null &&
+                DateUtils.getCurrentWeek() > maxCounterValue.getFirst()+1) {
 
             log.info("Updating weekly stats now...");
 
             WeeklyStats weeklyStats = new WeeklyStats();
-            Map<String, String> currentWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentDate());
+            Map<String, String> requiredWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentWeek()-1);
 
             //Set all values
-            weeklyStats.setWeek(DateUtils.getCurrentWeek());
-            weeklyStats.setStartDate(LocalDate.parse(currentWeekDates.get(Constants.MONDAY)));
-            weeklyStats.setEndDate(LocalDate.parse(currentWeekDates.get(Constants.SUNDAY)));
+            weeklyStats.setWeek(DateUtils.getCurrentWeek()-1);
+            weeklyStats.setStartDate(LocalDate.parse(requiredWeekDates.get(Constants.MONDAY)));
+            weeklyStats.setEndDate(LocalDate.parse(requiredWeekDates.get(Constants.SUNDAY)));
             weeklyStats.setTotalGain(statsRepository.getWeeklyGain(weeklyStats.getStartDate()));
-            weeklyStats.setTotalGain(statsRepository.getWeeklySpent(weeklyStats.getStartDate()));
+            weeklyStats.setTotalSpent(statsRepository.getWeeklySpent(weeklyStats.getStartDate()));
             weeklyStats.setTotalDeficit(Constants.WEEKLY_LIMIT - (statsRepository.getWeeklyNetGains(weeklyStats.getStartDate())));
             weeklyStats.setWeeklyLoss((double) statsRepository.getWeeklyDeficit(weeklyStats.getStartDate()) / Constants.KILO_CALS);
 
             weeklyStatsRepository.save(weeklyStats);
             log.info("Stats updated for week: {}", DateUtils.getCurrentWeek());
         }
-        log.info("Stat will be updated at the beginning of a new week.");
+        log.info("Stats will be updated at the beginning of a new week.");
+    }
+
+    public List<WeeklyStats> allWeeks() {
+        return weeklyStatsRepository.findAll();
     }
 }
