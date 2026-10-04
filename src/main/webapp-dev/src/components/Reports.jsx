@@ -16,13 +16,13 @@ import {
 
 
 export default function Reports() {
-    const [weeklyStats, setWeeklyStat] = useState([]);
+    const [weeklyStats, setWeeklyStats] = useState([]);
 
     useEffect(() => {
         axios
             .get("http://localhost:8080/api/reports/list")
             .then((response) => {
-                setWeeklyStat(response.data);
+                setWeeklyStats(response.data);
             })
             .catch((error) => {
                 console.error(error);
@@ -64,7 +64,7 @@ export default function Reports() {
             <div className="flex flex-col mt-20">
                 <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md">Weekly Deficit Trends</p>
                 <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
-                <ResponsiveContainer width="100%" height={400}>
+                <ResponsiveContainer width="100%" height={600}>
                     <BarChart
                         data={weeklyStats}
                         layout="vertical"
@@ -91,12 +91,12 @@ export default function Reports() {
                         />
                         <Bar
                             dataKey="totalSpent"
-                            fill="#44e960c0"
+                            fill="#35B049"
                             barSize={20}
                         />
                         <Bar
                             dataKey="totalDeficit"
-                            fill="#20b2abc0"
+                            fill="#3620B2"
                             barSize={20}
                         />
                     </BarChart>
