@@ -10,5 +10,5 @@ public class Constants {
     public static final String SUNDAY = "Sunday";
     public static final String DATE_FORMAT = "yyyy-mm-dd";
     public static final int WEEKLY_LIMIT = 12000;
-    public static final int KILO_CALS = 77000;
+    public static final int KILO_CALS = 7700;
 }
