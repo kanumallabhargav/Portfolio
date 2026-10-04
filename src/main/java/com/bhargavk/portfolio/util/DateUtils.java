@@ -13,6 +13,10 @@ public class DateUtils {
         return LocalDate.now();
     }
 
+    public static LocalDate yesterday() {
+        return getCurrentDate().minusDays(1);
+    }
+
     public static int getCurrentWeek() {
         return getCurrentDate().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
     }
