@@ -11,6 +11,7 @@ import {
     Legend,
     ResponsiveContainer,
     Line,
+    ReferenceLine,
     LineChart
 } from "recharts";
 
@@ -29,6 +30,7 @@ export default function Reports() {
             })
     }, [])
 
+    const GAIN_THRESHOLD = 12000;
 
     return (
         <>
@@ -64,65 +66,117 @@ export default function Reports() {
             <div className="flex flex-col mt-20">
                 <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md">Weekly Deficit Trends</p>
                 <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
-                <ResponsiveContainer width="100%" height={600}>
-                    <BarChart
-                        data={weeklyStats}
-                        layout="vertical"
-                        margin={{
-                            top: 20,
-                            right: 30,
-                            left: 30,
-                            bottom: 20
-                        }}
-                        barCategoryGap="35%"
-                    >
-                        <CartesianGrid vertical={false} />
-                        <XAxis type="number" />
-                        <YAxis
-                            type="category"
-                            dataKey="week"
-                        />
-                        <Tooltip />
-                        <Legend />
-                        <Bar
-                            dataKey="totalGain"
-                            fill="#e94444c0"
-                            barSize={20}
-                        />
-                        <Bar
-                            dataKey="totalSpent"
-                            fill="#35B049"
-                            barSize={20}
-                        />
-                        <Bar
-                            dataKey="totalDeficit"
-                            fill="#3620B2"
-                            barSize={20}
-                        />
-                    </BarChart>
-                </ResponsiveContainer>
+                    <ResponsiveContainer width="100%" height={600}>
+                        <BarChart
+                            data={weeklyStats}
+                            layout="vertical"
+                            margin={{
+                                top: 20,
+                                right: 30,
+                                left: 30,
+                                bottom: 20
+                            }}
+                            barCategoryGap="35%"
+                        >
+                            <CartesianGrid vertical={false} />
+                            <XAxis type="number" />
+                            <YAxis
+                                type="category"
+                                dataKey="week"
+                            />
+                            <Tooltip />
+                            <Legend />
+                            <Bar
+                                dataKey="totalGain"
+                                fill="#e94444c0"
+                                barSize={20}
+                            />
+                            <Bar
+                                dataKey="totalSpent"
+                                fill="#35B049"
+                                barSize={20}
+                            />
+                            <Bar
+                                dataKey="totalDeficit"
+                                fill="#3620B2"
+                                barSize={20}
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
                 </div>
                 <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md mt-5">Weekly Loss Distribution</p>
                 <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
                     <LineChart
-                    style={{ width: '100%', maxHeight: '70vh', aspectRatio: 1.618 }}
-                    responsive
-                    data={weeklyStats}
-                    margin={{
-                        top: 15,
-                        right: 0,
-                        left: 0,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid />
-                    <XAxis dataKey="week" />
-                    <YAxis width="auto" />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="weeklyLoss" strokeDasharray="2 2" />
-                    <RechartsDevtools />
-                </LineChart>
+                        style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
+                        responsive
+                        data={weeklyStats}
+                        margin={{
+                            top: 15,
+                            right: 0,
+                            left: 0,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid />
+                        <XAxis dataKey="week" />
+                        <YAxis width="auto" />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="weeklyLoss" strokeDasharray="2 2" />
+                        <RechartsDevtools />
+                    </LineChart>
+                </div>
+                <div className="grid grid-cols-2 mt-5 gap-5">
+                    <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
+                        <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md mt-5">Gain Distribution</p>
+                        <LineChart
+                            style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
+                            responsive
+                            data={weeklyStats}
+                            margin={{
+                                top: 15,
+                                right: 0,
+                                left: 0,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid />
+                            <XAxis dataKey="week" />
+                            <YAxis width="auto" />
+                            <Tooltip />
+                            <Legend />
+                            <ReferenceLine
+                                y={GAIN_THRESHOLD}
+                                stroke="red"
+                                strokeWidth={2}
+                                label={{ value: 'Threshold', fill: 'red', position: 'left' }}
+                            />
+                            <Line type="monotone" dataKey="totalGain" strokeDasharray="2 2" />
+                            <RechartsDevtools />
+                        </LineChart>
+                    </div>
+                    <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
+                        <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md mt-5">Spent Distribution</p>
+                        <LineChart
+                            style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
+                            responsive
+                            data={weeklyStats}
+                            margin={{
+                                top: 15,
+                                right: 0,
+                                left: 0,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid />
+                            <XAxis dataKey="week" />
+                            <YAxis width="auto" />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="totalSpent" strokeDasharray="2 2" />
+                            <RechartsDevtools />
+                        </LineChart>
+                    </div>
                 </div>
             </div>
         </>
