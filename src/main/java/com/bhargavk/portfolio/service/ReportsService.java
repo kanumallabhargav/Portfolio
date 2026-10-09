@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,5 +61,28 @@ public class ReportsService {
 
     public List<WeeklyStats> allWeeks() {
         return weeklyStatsRepository.findAll();
+    }
+
+    public Map<String, Integer> getCurrentWeekProgress() {
+        Map<String, String> requiredWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentWeek());
+        LocalDate startDate = LocalDate.parse(requiredWeekDates.get(Constants.MONDAY));
+
+        int currentDividend = statsRepository.getCurrentWeekDividend(startDate);
+        int currentLimit = (Constants.WEEKLY_LIMIT/7) * currentDividend;
+        int currentGain = statsRepository.getWeeklyGain(startDate);
+        int remainingGain = Constants.WEEKLY_LIMIT - currentGain;
+
+        Map<String, Integer> currentWeekProgressMap = new HashMap<>();
+        currentWeekProgressMap.put(Constants.CURRENT_GAIN, currentGain);
+        currentWeekProgressMap.put(Constants.GAIN_LIMIT, currentLimit);
+        currentWeekProgressMap.put(Constants.CURRENT_SPENT, statsRepository.getWeeklySpent(startDate));
+        currentWeekProgressMap.put(Constants.REMAINING_GAIN, remainingGain);
+        currentWeekProgressMap.put(Constants.DAILY_LIMIT, remainingGain/calculateDenominator(currentDividend));
+
+        return currentWeekProgressMap;
+    }
+
+    private int calculateDenominator(int currentDividend) {
+        return currentDividend == 7 ? 1 : 7 - currentDividend;
     }
 }
