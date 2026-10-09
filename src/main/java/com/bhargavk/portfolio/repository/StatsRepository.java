@@ -43,6 +43,9 @@ public interface StatsRepository extends JpaRepository<Stats, Long> {
     @Query("SELECT sum(s.totalDeficit) from Stats s WHERE s.statDate >= :weekDate")
     Integer getWeeklyDeficit(@Param("weekDate") LocalDate weekDate);
 
+    @Query("SELECT count(*) from Stats s WHERE s.statDate >= :weekDate")
+    Integer getCurrentWeekDividend(@Param("weekDate") LocalDate weekDate);
+
     @Query("""
                 SELECT s.statDate
                 FROM Stats s
