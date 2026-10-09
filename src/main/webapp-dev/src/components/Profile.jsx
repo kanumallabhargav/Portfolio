@@ -87,7 +87,7 @@ export default function Profile() {
                 </div>
                 <div
                     className="absolute top-0 right-10 left-10 bg-gradient-to-r from-violet-600/40 to-red-400/40 text-black p-2 rounded-2xl shadow-2xl z-10 h-58">
-                    <img src={ProfilePhoto} alt="Company Logo" width="300"/>
+                    <img src={ProfilePhoto} alt="Company Logo" width="300" className="rounded-xl"/>
                 </div>
             </div>
             <div
