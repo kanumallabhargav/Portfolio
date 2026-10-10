@@ -18,6 +18,14 @@ import ProfileButton from "./profile/ProfileButton";
 import ProfilePhoto from '../assets/static/ProfilePhoto.jpg'
 import About from "./profile/About.jsx";
 
+const handleLinkedIn = () => {
+    window.open("https://www.linkedin.com/in/bhargav-kanumalla-68b8841a7", "_blank", "noopener,noreferrer")
+}
+
+const handleX = () => {
+    window.open("https://x.com/BhargavK53554", "_blank", "noopener,noreferrer")
+}
+
 export default function Profile() {
     const [selectedTopic, setSelectedTopic] = useState('about');
 
@@ -41,13 +49,17 @@ export default function Profile() {
                             <button className="h-10 w-10 rounded-full bg-slate-300/40
                                                 hover:bg-red-400/50 
                                                 active:bg-slate-500 
-                                                flex flex-col items-center justify-center">
+                                                flex flex-col items-center justify-center"
+                                                onClick={handleX}
+                                                >
                                 <span><IconX/></span>
                             </button>
                             <button className="h-10 w-10 rounded-full bg-slate-300/40
                                                 hover:bg-red-400/50  
                                                 active:bg-slate-500 
-                                                flex flex-col items-center justify-center">
+                                                flex flex-col items-center justify-center"
+                                                onClick={handleLinkedIn}
+                                                >
                                 <span><IconLinkedIn/></span>
                             </button>
                         </div>
