@@ -41,7 +41,7 @@ export const DescriptionCloud = () => {
 export const DescriptionSQL = () => {
     return(
         <>
-        Designing efficient queries, managing relational data, and optimizing database operations for reliable, high-performance applications.
+        Designing efficient queries, managing relational data, and optimizing DB operations for reliable, high-performance applications.
         </>
     )
 }
