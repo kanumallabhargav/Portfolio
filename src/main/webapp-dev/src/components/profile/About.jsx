@@ -10,7 +10,7 @@ import {
 
 export default function About() {
     return <div className="m-8 select-none">
-        <p className="font-semibold text-zinc-800/90 text-3xl">About</p>
+        <p className="font-semibold text-zinc-800/90 text-3xl">भार्गव के</p>
         <p className="mt-2 text-slate-200 ">
             <DescriptionAbout />
         </p>

@@ -1,5 +1,5 @@
 import Profile from "./Profile";
-import { useState} from "react";
+import { useState } from "react";
 import TabButton from "./TabButton";
 import ContentHelper from "./ContentHelper";
 
@@ -18,6 +18,8 @@ export default function Body() {
                     isSelected={selectedTopic === 'tenure'}>Tenure</TabButton>
                 <TabButton clickHandler={() => clickHandler('stats')}
                     isSelected={selectedTopic === 'stats'}>Stats</TabButton>
+                <TabButton clickHandler={() => clickHandler('playGround')}
+                    isSelected={selectedTopic === 'playGround'}>Playground</TabButton>
             </menu>
 
             <div id="tab-content">
