@@ -19,6 +19,7 @@ import {
 export default function Reports() {
     const [weeklyStats, setWeeklyStats] = useState([]);
     const [currentWeekProgress, setCurrentWeekProgress] = useState([])
+    const [statColor, setStatColor] = useState('text-white')
 
     useEffect(() => {
         axios
@@ -36,6 +37,9 @@ export default function Reports() {
             .get("http://localhost:8080/api/reports/progress")
             .then((response) => {
                 setCurrentWeekProgress(response.data);
+                currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? 
+                setStatColor('text-red-500') 
+                : setStatColor('text-green-500')
             })
             .catch((error) => {
                 console.error(error);
@@ -51,7 +55,7 @@ export default function Reports() {
                 <div className="grid grid-cols-4 mb-3">
                     <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
                     <p className="text-center text-zinc-300/70 text-xl">Current Gain / Limit</p>
-                    <p className="text-center text-4xl text-white">
+                    <p className={`text-center text-4xl ${statColor} animate animate-pulse hover:animate-none`}>
                         {currentWeekProgress.currentGain}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70 mt-1">{currentWeekProgress.gainLimit}</p>
@@ -82,7 +86,7 @@ export default function Reports() {
                     <p className="border-r">Total Deficit</p>
                     <p>TFL</p>
                 </div>
-                {weeklyStats.map((ws) => (<div key={ws.id} className="grid grid-cols-5 even:bg-purple-900/30 even:py-1">
+                {weeklyStats.map((ws) => (<div key={ws.id} className="grid grid-cols-5 even:bg-purple-900/30 even:py-1 animate-row">
                     <div className=''>
                         <p><span className='font-bold text-green-600/80'>{ws.week}</span> {new Date(ws.startDate).toLocaleDateString("en-GB", {
                             day: "numeric",
