@@ -30,7 +30,7 @@ export default function StatsContainer() {
     };
 
     return (
-        <div className="text-zinc-300">
+        <div className="text-zinc-300 nav-container">
             <select value={selectedValue} onChange={handleChange}
             className="text-black w-12 rounded-md bg-slate-300/50 align-super mr-5"
             >

@@ -25,7 +25,7 @@ export default function History() {
                 <p className="border-r">Remaining Loss<p className="text-sm text-slate-50/30 font-light">kg</p></p>
                 <p>ETA<p className="text-sm text-slate-50/30 font-light">days</p></p>
             </div>
-            {history.map((hist) => (<div key={hist.id} className="grid grid-cols-5 even:bg-purple-900/30 even:py-1">
+            {history.map((hist) => (<div key={hist.id} className="grid grid-cols-5 even:bg-purple-900/30 even:py-1 animate-row">
                 <div className="grid grid-cols-2 text-center">
                     <div className="text-right pr-3">
                         {new Date(hist.statDate).toLocaleDateString("en-US", {

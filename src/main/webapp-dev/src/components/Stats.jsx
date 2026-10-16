@@ -156,7 +156,7 @@ export default function Stats() {
                         <p className="border-r">Net Gain</p>
                         <p>Total Deficit</p>
                     </div>
-                    {stats.map((stat) => (<div key={stat.id} className="grid grid-cols-6 even:bg-purple-900/30 even:py-1">
+                    {stats.map((stat) => (<div key={stat.id} className="grid grid-cols-6 even:bg-purple-900/30 even:py-1 animate-row">
                         <div className="grid grid-cols-2 text-center">
                             <div className="text-right pr-3">
                                 {new Date(stat.statDate).toLocaleDateString("en-US", {
@@ -191,28 +191,28 @@ export default function Stats() {
                 </div>
             </div>
             <div className="grid grid-cols-4 mt-12 gap-3">
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Total Fat Loss</p>
                     <p className="text-center text-5xl">
                         {tfl}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70">kCal</p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Current Loss</p>
                     <p className="text-center text-5xl">
                         {cl.toFixed(2)}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70">kg</p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Remaining Loss</p>
                     <p className="text-center text-5xl">
                         {rl.toFixed(2)}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70">kg</p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Adjusted Loss</p>
                     <p className="text-center text-5xl">
                         {/* {(((77000 * rowCount)/tfl).toFixed())-13} */}
