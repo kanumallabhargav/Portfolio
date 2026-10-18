@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { IconBarsDownArrow, IconBarsUpArrow, IconDoubleArrows } from '../assets/static/Icons';
 
 export default function Stats() {
 
@@ -7,17 +8,17 @@ export default function Stats() {
     const [refresh, setRefresh] = useState(1);
     const [rowCount, setRowCount] = useState(0)
     const [calcLoss, setCalcLoss] = useState(0);
+    const [history, setHistory] = useState([]);
+    const [sortConfig, setSortConfig] = useState({
+        key: "statDate",
+        direction: "asc",
+    });
     const [formData, setFormData] = useState({
         gain: "",
         spent: "",
         protein: "",
         statDate: ""
     });
-
-    var tfl = 0;
-    var cl = tfl;
-    var rl = cl;
-    var tempEta = rl;
 
     useEffect(() => {
         axios
@@ -33,6 +34,17 @@ export default function Stats() {
 
     useEffect(() => {
         axios
+            .get("http://localhost:8080/api/history/vitals")
+            .then((response) => {
+                setHistory(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }, [])
+
+    useEffect(() => {
+        axios
             .get("http://localhost:8080/api/stats/getNewTfl")
             .then((response) => {
                 setCalcLoss(response.data)
@@ -41,20 +53,6 @@ export default function Stats() {
                 console.error(error);
             });
     }, [refresh]);
-
-    function calcNetGain(gain, spent) {
-        return gain - spent;
-    }
-
-    function calcTotalDeficit(netGain) {
-        const tdRow = 2500 - netGain;
-        tfl = tfl + tdRow
-        cl = tfl / 7700;
-        rl = 10 - cl;
-        tempEta = rl * 6;
-
-        return tdRow;
-    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -87,6 +85,62 @@ export default function Stats() {
 
         setRefresh(refresh + 1);
     };
+
+    const handleSort = (key) => {
+        setSortConfig((prev) => ({
+            key,
+            direction:
+                prev.key === key && prev.direction === "asc"
+                    ? "desc"
+                    : "asc",
+        }));
+    };
+
+    const sortedStats = useMemo(() => {
+        return [...stats].sort((row1, row2) => {
+            const value1 = row1[sortConfig.key];
+            const value2 = row2[sortConfig.key];
+
+            let comparison;
+
+            if (sortConfig.key === "statDate") {
+                comparison = value1.localeCompare(value2);
+            } else if (
+                typeof value1 === "number" &&
+                typeof value2 === "number"
+            ) {
+                comparison = value1 - value2;
+            } else {
+                comparison = String(value1).localeCompare(String(value2));
+            }
+
+            return sortConfig.direction === "asc"
+                ? comparison
+                : -comparison;
+        });
+    }, [stats, sortConfig]);
+
+    const getSortArrow = (key) => {
+        if (sortConfig.key !== key) return <IconDoubleArrows />;
+        return sortConfig.direction === "asc" ? <IconBarsUpArrow /> : <IconBarsDownArrow />;
+    };
+
+    const resolveCase = (key) => {
+        switch (key) {
+            case 'statDate':
+                return 'Date';
+            case 'gain':
+                return 'Gain';
+            case 'spent':
+                return 'Spent';
+            case 'protein':
+                return 'Protein';
+            case 'netGain':
+                return 'Net Gain';
+            case 'totalDeficit':
+                return 'Total Deficit';
+        }
+    }
 
     return (
         <div className="select-none">
@@ -148,15 +202,24 @@ export default function Stats() {
                     </div>
                 </form>
                 <div className="grid grid-cols-1 gap-2 text-center shadow-xl">
-                    <div className="grid grid-cols-6 font-semibold bg-zinc-900/40 py-2">
-                        <p className="border-r">Date</p>
-                        <p className="border-r">Gain</p>
-                        <p className="border-r">Spent</p>
-                        <p className="border-r">Protein</p>
-                        <p className="border-r">Net Gain</p>
-                        <p>Total Deficit</p>
+                    <div className="grid grid-cols-6 bg-zinc-900/40 py-2">
+                        {["statDate", "gain", "spent", "protein", "netGain", "totalDeficit"].map((key) => (
+                            <th key={key} className="border-x grid xl:grid-cols-4 lg:grid-cols-3">
+                                <span className="col-span-1 pl-4">
+                                    {getSortArrow(key)}
+                                </span>
+                                <button
+                                    type="button"
+                                    className="col-span-2"
+                                    onClick={() => handleSort(key)}>
+                                    <span className="font-medium">
+                                        {resolveCase(key)}
+                                    </span>
+                                </button>
+                            </th>
+                        ))}
                     </div>
-                    {stats.map((stat) => (<div key={stat.id} className="grid grid-cols-6 even:bg-purple-900/30 even:py-1 animate-row">
+                    {sortedStats.map((stat) => (<div key={stat.id} className="grid grid-cols-6 even:bg-purple-900/30 even:py-1 animate-row">
                         <div className="grid grid-cols-2 text-center">
                             <div className="text-right pr-3">
                                 {new Date(stat.statDate).toLocaleDateString("en-US", {
@@ -175,8 +238,8 @@ export default function Stats() {
                         <p>{stat.gain}</p>
                         <p>{stat.spent}</p>
                         <p>{stat.protein}</p>
-                        <p>{calcNetGain(stat.gain, stat.spent)}</p>
-                        <p>{calcTotalDeficit(calcNetGain(stat.gain, stat.spent))}</p>
+                        <p>{stat.netGain}</p>
+                        <p>{stat.totalDeficit}</p>
                     </div>
                     ))}
                     <div className="grid grid-cols-6 font-semibold bg-zinc-900/40 py-2">
@@ -190,32 +253,24 @@ export default function Stats() {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-4 mt-12 gap-3">
+            <div className="grid grid-cols-3 mt-12 gap-3">
                 <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Total Fat Loss</p>
                     <p className="text-center text-5xl">
-                        {tfl}
+                        {history.tfl}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70">kCal</p>
                 </div>
                 <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Current Loss</p>
                     <p className="text-center text-5xl">
-                        {cl.toFixed(2)}
-                    </p>
-                    <p className="text-center text-sm text-zinc-300/70">kg</p>
-                </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
-                    <p className="text-center text-zinc-300/70 text-xl">Remaining Loss</p>
-                    <p className="text-center text-5xl">
-                        {rl.toFixed(2)}
+                        {history.cl}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70">kg</p>
                 </div>
                 <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
                     <p className="text-center text-zinc-300/70 text-xl">Adjusted Loss</p>
                     <p className="text-center text-5xl">
-                        {/* {(((77000 * rowCount)/tfl).toFixed())-13} */}
                         {calcLoss}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70">kg</p>

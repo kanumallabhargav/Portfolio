@@ -1,5 +1,6 @@
 package com.bhargavk.portfolio.service;
 
+import com.bhargavk.portfolio.dto.CurrentVitalsDTO;
 import com.bhargavk.portfolio.dto.HistoryDTO;
 import com.bhargavk.portfolio.entity.History;
 import com.bhargavk.portfolio.entity.Stats;
@@ -7,6 +8,7 @@ import com.bhargavk.portfolio.repository.HistoryRepository;
 import com.bhargavk.portfolio.repository.StatsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,5 +55,14 @@ public class HistoryService {
                 .mapToInt(Integer::intValue)
                 .sum();
 
+    }
+
+    public CurrentVitalsDTO getVitals() {
+        List<History> latestRecord = historyRepository.findLatestHistoryRecord(PageRequest.of(0,1));
+
+        return new CurrentVitalsDTO(
+                latestRecord.getFirst().getTotalFatLoss(),
+                latestRecord.getFirst().getCurrentLoss()
+        );
     }
 }

@@ -1,5 +1,6 @@
 package com.bhargavk.portfolio.controller;
 
+import com.bhargavk.portfolio.dto.CurrentVitalsDTO;
 import com.bhargavk.portfolio.dto.HistoryDTO;
 import com.bhargavk.portfolio.service.HistoryService;
 import lombok.AllArgsConstructor;
@@ -20,5 +21,10 @@ public class HistoryController {
     @GetMapping("/list")
     public List<HistoryDTO> allHistory() {
         return historyService.getAllHistory();
+    }
+
+    @GetMapping("/vitals")
+    public CurrentVitalsDTO getVitals() {
+        return historyService.getVitals();
     }
 }
