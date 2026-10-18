@@ -19,7 +19,6 @@ import {
 export default function Reports() {
     const [weeklyStats, setWeeklyStats] = useState([]);
     const [currentWeekProgress, setCurrentWeekProgress] = useState([])
-    const [statColor, setStatColor] = useState('text-white')
 
     useEffect(() => {
         axios
@@ -37,9 +36,6 @@ export default function Reports() {
             .get("http://localhost:8080/api/reports/progress")
             .then((response) => {
                 setCurrentWeekProgress(response.data);
-                currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? 
-                setStatColor('text-red-500') 
-                : setStatColor('text-green-500')
             })
             .catch((error) => {
                 console.error(error);
@@ -55,7 +51,7 @@ export default function Reports() {
                 <div className="grid grid-cols-4 mb-3">
                     <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
                     <p className="text-center text-zinc-300/70 text-xl">Current Gain / Limit</p>
-                    <p className={`text-center text-4xl ${statColor} animate animate-pulse hover:animate-none`}>
+                    <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? 'text-red-500' : 'text-green-500'} animate animate-pulse hover:animate-none`}>
                         {currentWeekProgress.currentGain}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70 mt-1">{currentWeekProgress.gainLimit}</p>
