@@ -2,7 +2,6 @@ import {
     IconUser,
     IconWork,
     IconSkills,
-    IconContact,
     IconEmail,
     IconX,
     IconLinkedIn,
@@ -115,8 +114,6 @@ export default function Profile() {
                                isSelected={selectedTopic === 'work'}> <IconWork/></ProfileButton>
                 <ProfileButton clickHandler={() => clickHandler('skills')}
                                isSelected={selectedTopic === 'skills'}> <IconSkills/></ProfileButton>
-                <ProfileButton clickHandler={() => clickHandler('contact')}
-                               isSelected={selectedTopic === 'contact'}> <IconContact/></ProfileButton>
             </div>
         </div>
     );

@@ -85,7 +85,7 @@ export default function Tenure() {
 
     return (
         <>
-        <p className="border-l-2 px-4 ml-4 font-semibold bg-purple-900/20 w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-white">Organizations</p>
+            <p className="border-l-2 px-4 ml-4 font-semibold bg-purple-900/20 w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-white">Organizations</p>
             <div className="grid grid-cols-1 gap-2 text-center shadow-xl text-zinc-300 even:bg-purple-900/30">
                 <div className="grid grid-cols-5 font-semibold bg-zinc-900/40 py-2">
                     <p className="border-r">Organization</p>
