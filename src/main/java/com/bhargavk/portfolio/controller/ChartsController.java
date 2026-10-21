@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -31,19 +30,7 @@ public class ChartsController {
 
     @GetMapping("/deficit-trends")
     public ResponseEntity<List<DeficitTrendDTO>> getDeficitTrends() {
-        List<DeficitTrendDTO> response = new java.util.ArrayList<>(chartsService
-                .getDeficitTrends()
-                .entrySet()
-                .stream()
-                .map(
-                        entry -> new DeficitTrendDTO(
-                                entry.getKey(),
-                                entry.getValue()
-                        )
-                )
-                .toList());
-        Collections.reverse(response);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().body(chartsService.getDeficitTrends());
     }
 
     @GetMapping("/tfl-goal")
