@@ -122,3 +122,11 @@ border-radius: 2rem;
     transition-delay: 0s;
     transform: scale(1.2);
 }
+
+.skill-item-container div:hover {
+    transition-property: transform;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+    transition-delay: 0s;
+    transform: scale(1.1);
+}
