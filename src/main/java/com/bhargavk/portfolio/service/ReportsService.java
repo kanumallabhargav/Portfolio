@@ -73,11 +73,11 @@ public class ReportsService {
         int remainingGain = Constants.WEEKLY_LIMIT - currentGain;
 
         Map<String, Integer> currentWeekProgressMap = new HashMap<>();
-        currentWeekProgressMap.put(Constants.CURRENT_GAIN, currentGain);
-        currentWeekProgressMap.put(Constants.GAIN_LIMIT, currentLimit);
-        currentWeekProgressMap.put(Constants.CURRENT_SPENT, statsRepository.getWeeklySpent(startDate));
+        currentWeekProgressMap.put(Constants.CURRENT_GAIN, currentDividend == 0 ? 0 : currentGain);
+        currentWeekProgressMap.put(Constants.GAIN_LIMIT, currentDividend == 0 ? 1714 : currentLimit);
+        currentWeekProgressMap.put(Constants.CURRENT_SPENT, currentDividend == 0 ? 0 : statsRepository.getWeeklySpent(startDate));
         currentWeekProgressMap.put(Constants.REMAINING_GAIN, remainingGain);
-        currentWeekProgressMap.put(Constants.DAILY_LIMIT, remainingGain/calculateDenominator(currentDividend));
+        currentWeekProgressMap.put(Constants.DAILY_LIMIT, currentDividend == 0 ? 1714 : remainingGain/calculateDenominator(currentDividend));
 
         return currentWeekProgressMap;
     }
