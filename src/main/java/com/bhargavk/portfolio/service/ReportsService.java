@@ -69,7 +69,7 @@ public class ReportsService {
 
         int currentDividend = statsRepository.getCurrentWeekDividend(startDate);
         int currentLimit = (Constants.WEEKLY_LIMIT/7) * currentDividend;
-        int currentGain = statsRepository.getWeeklyGain(startDate);
+        int currentGain = statsRepository.getWeeklyGain(startDate) == null ? 0 : statsRepository.getWeeklyGain(startDate);
         int remainingGain = Constants.WEEKLY_LIMIT - currentGain;
 
         Map<String, Integer> currentWeekProgressMap = new HashMap<>();
