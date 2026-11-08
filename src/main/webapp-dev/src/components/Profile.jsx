@@ -16,6 +16,9 @@ import ProfileContentHelper from "./profile/ProfileContentHelper"
 import ProfileButton from "./profile/ProfileButton";
 import ProfilePhoto from '../assets/static/ProfilePhoto.jpg'
 import About from "./profile/About.jsx";
+import {useTheme} from "../context/ThemeContext.jsx";
+import {useAccentColor} from "../context/AccentColorContext.jsx";
+import accentColors from "../themes/accentColors.js";
 
 const handleLinkedIn = () => {
     window.open("https://www.linkedin.com/in/bhargav-kanumalla-68b8841a7", "_blank", "noopener,noreferrer")
@@ -27,6 +30,10 @@ const handleX = () => {
 
 export default function Profile() {
     const [selectedTopic, setSelectedTopic] = useState('about');
+    const {theme} = useTheme();
+
+    const {accentColor} = useAccentColor();
+    const accent = accentColors[accentColor][theme];
 
     function clickHandler(selectedButton) {
         setSelectedTopic(selectedButton);
@@ -36,7 +43,8 @@ export default function Profile() {
         <div className="grid grid-cols-6">
             <div className="relative w-80 h-48 bg-transparent rounded-lg">
                 <div className="p-4 text-white">
-                    <div className="bg-slate-300/40 mt-16 h-[38rem] shadow-2xl rounded-lg select-none">
+                    <div className="mt-16 h-[38rem] shadow-2xl rounded-lg select-none"
+                         style={{backgroundColor: accent.foreground}}>
                         &nbsp;
                         <div className="mt-36 flex justify-around mx-10">
                             <button className="h-10 w-10 rounded-full bg-slate-300/40
@@ -49,20 +57,20 @@ export default function Profile() {
                                                 hover:bg-red-400/50 
                                                 active:bg-slate-500 
                                                 flex flex-col items-center justify-center"
-                                                onClick={handleX}
-                                                >
+                                    onClick={handleX}
+                            >
                                 <span><IconX/></span>
                             </button>
                             <button className="h-10 w-10 rounded-full bg-slate-300/40
                                                 hover:bg-red-400/50  
                                                 active:bg-slate-500 
                                                 flex flex-col items-center justify-center"
-                                                onClick={handleLinkedIn}
-                                                >
+                                    onClick={handleLinkedIn}
+                            >
                                 <span><IconLinkedIn/></span>
                             </button>
                         </div>
-                        <div className="bg-slate-300/40 mx-10 rounded-xl py-2 my-8 shadow-md">
+                        <div className="bg-slate-300/20 mx-10 rounded-xl py-2 my-8 shadow-md">
                             <div className="flex gap-5 px-5 mt-6 items-center">
                                 <div className="bg-slate-400/50 p-2 rounded-lg">
                                     <IconPosition/>
@@ -90,7 +98,8 @@ export default function Profile() {
                         </div>
                         <div className="flex justify-center">
                             <button
-                                className="flex gap-2 bg-purple-800/80 px-4 py-2 rounded-xl hover:bg-purple-700/80 active:bg-purple-900/80 shadow-md active:shadow-inner">
+                                className="flex gap-2 px-4 py-2 rounded-xl shadow-md active:shadow-inner"
+                                style={{backgroundColor: accent.background, color: accent.text}}>
                                 <span><IconDownload/></span>Download Resume
                             </button>
                         </div>
@@ -102,12 +111,14 @@ export default function Profile() {
                 </div>
             </div>
             <div
-                className="text-white col-span-4 ml-28 lg:ml-36 lg:mr-3 bg-slate-300/40 mr-12 rounded-lg h-[43rem] shadow-2xl">
+                className="text-white col-span-4 ml-28 lg:ml-36 lg:mr-3 mr-12 rounded-lg h-[43rem] shadow-2xl"
+                style={{backgroundColor: accent.foreground}}>
                 {!selectedTopic ? <About/> : <ProfileContentHelper
                     selectedTopic={selectedTopic}/>}
             </div>
             <div
-                className="text-white bg-slate-300/40 mr-12 rounded-lg h-[20rem] w-24 flex flex-col items-center justify-around list-none shadow-2xl">
+                className="mr-12 rounded-lg h-[20rem] w-24 flex flex-col items-center justify-around list-none shadow-2xl"
+                style={{backgroundColor: accent.foreground}}>
                 <ProfileButton clickHandler={() => clickHandler('about')}
                                isSelected={selectedTopic === 'about'}> <IconUser/></ProfileButton>
                 <ProfileButton clickHandler={() => clickHandler('work')}
