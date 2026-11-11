@@ -1,6 +1,9 @@
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { IconBarsDownArrow, IconBarsUpArrow, IconDoubleArrows } from '../assets/static/Icons';
+import { useTheme } from "../context/ThemeContext";
+import { useAccentColor } from "../context/AccentColorContext";
+import accentColors from "../themes/accentColors";
 
 export default function Stats() {
 
@@ -19,6 +22,9 @@ export default function Stats() {
         protein: "",
         statDate: ""
     });
+    const {theme} = useTheme();
+    const {accentColor} = useAccentColor();
+    const accent = accentColors[accentColor][theme];
 
     useEffect(() => {
         axios
@@ -153,17 +159,16 @@ export default function Stats() {
                             name="statDate"
                             value={formData.statDate}
                             onChange={handleChange}
-                            className="rounded bg-purple-800/50 text-slate-300 p-3 font-semibold"
+                            className={`rounded bg-[${accent.foreground}] text-[${accent.text}] p-3 font-semibold`}
                             required
                         />
-
                         <input
                             type="number"
                             name="gain"
                             placeholder="Gain"
                             value={formData.gain}
                             onChange={handleChange}
-                            className="rounded bg-purple-800/50 text-slate-300 p-3 font-semibold"
+                            className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold`}
                             required
                         />
 
@@ -173,7 +178,7 @@ export default function Stats() {
                             placeholder="Spent"
                             value={formData.spent}
                             onChange={handleChange}
-                            className="rounded bg-purple-800/50 text-slate-300 p-3 font-semibold"
+                            className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold`}
                             required
                         />
 
@@ -183,28 +188,28 @@ export default function Stats() {
                             placeholder="Protein"
                             value={formData.protein}
                             onChange={handleChange}
-                            className="rounded bg-purple-800/50 text-slate-300 p-3 font-semibold"
+                            className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold`}
                             required
                         />
                         <button
                             type="submit"
-                            className="
+                            className={`
                             text-red hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
-                            border-red-400/40 rounded px-3 text-slate-300 shadow-sm transition-all 
+                            border-[${accent.accent}] rounded px-3 text-white shadow-sm transition-all 
                             before:absolute before:bottom-0 before:left-0 before:top-0 
-                            before:z-0 before:h-full before:w-0 before:bg-red-400/40 
+                            before:z-0 before:h-full before:w-0 before:bg-[${accent.accent}] 
                             before:transition-all before:duration-100 
-                            hover:text-white hover:shadow-red-400/50 hover:before:left-0 
+                            hover:text-black hover:shadow-[${accent.text}] hover:before:left-0 
                             hover:before:w-full
-                            ">
+                            `}>
                             Save
                         </button>
                     </div>
                 </form>
                 <div className="grid grid-cols-1 gap-2 text-center shadow-xl">
-                    <div className="grid grid-cols-6 bg-zinc-900/40 py-2">
+                    <div className={`grid grid-cols-6 bg-[${accent.header}] py-2`}>
                         {["statDate", "gain", "spent", "protein", "netGain", "totalDeficit"].map((key) => (
-                            <th key={key} className="border-x grid xl:grid-cols-4 lg:grid-cols-3">
+                            <th key={key} className={`border-x grid xl:grid-cols-4 lg:grid-cols-3 text-[${accent.text}]`}>
                                 <span className="col-span-1 pl-4">
                                     {getSortArrow(key)}
                                 </span>
@@ -219,7 +224,7 @@ export default function Stats() {
                             </th>
                         ))}
                     </div>
-                    {sortedStats.map((stat) => (<div key={stat.id} className="grid grid-cols-6 even:bg-purple-900/30 even:py-1 animate-row">
+                    {sortedStats.map((stat) => (<div key={stat.id} className={`grid grid-cols-6 even:bg-[${accent.foreground}] even:py-1 animate-row text-[${accent.text}]`}>
                         <div className="grid grid-cols-2 text-center">
                             <div className="text-right pr-3">
                                 {new Date(stat.statDate).toLocaleDateString("en-US", {
@@ -242,7 +247,7 @@ export default function Stats() {
                         <p>{stat.totalDeficit}</p>
                     </div>
                     ))}
-                    <div className="grid grid-cols-6 font-semibold bg-zinc-900/40 py-2">
+                    <div className={`grid grid-cols-6 bg-[${accent.header}] py-2`}>
                         <p className="border-r">Date</p>
                         <p className="border-r">Gain</p>
                         <p className="border-r">Spent</p>
@@ -254,26 +259,26 @@ export default function Stats() {
                 </div>
             </div>
             <div className="grid grid-cols-3 mt-12 gap-3">
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
-                    <p className="text-center text-zinc-300/70 text-xl">Total Fat Loss</p>
-                    <p className="text-center text-5xl">
+                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
+                    <p className={`text-center text-[${accent.text}] text-xl`}>Total Fat Loss</p>
+                    <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {history.tfl}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70">kCal</p>
+                    <p className={`text-center text-sm text-[${accent.text}]`}>kCal</p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
-                    <p className="text-center text-zinc-300/70 text-xl">Current Loss</p>
-                    <p className="text-center text-5xl">
+                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
+                    <p className={`text-center text-[${accent.text}] text-xl`}>Current Loss</p>
+                    <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {history.cl}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70">kg</p>
+                    <p className={`text-center text-sm text-[${accent.text}]`}>kg</p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl my-animation">
-                    <p className="text-center text-zinc-300/70 text-xl">Adjusted Loss</p>
-                    <p className="text-center text-5xl">
+                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
+                    <p className={`text-center text-[${accent.text}] text-xl`}>Adjusted Loss</p>
+                    <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {calcLoss}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70">kg</p>
+                    <p className={`text-center text-sm text-[${accent.text}]`}>kg</p>
                 </div>
             </div>
         </div>

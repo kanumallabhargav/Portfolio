@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
+import { useAccentColor } from "../context/AccentColorContext";
+import accentColors from "../themes/accentColors";
 
 export default function Calc() {
     const [remaining, setRemaining] = useState();
     const [net, setNet] = useState();
     const [isEnabled, setIsEnabled] = useState(false);
+    const {theme} = useTheme();
+    const {accentColor} = useAccentColor();
+    const accent = accentColors[accentColor][theme];
     const [formData, setFormData] = useState({
         gain: "",
         spent: ""
@@ -46,7 +52,7 @@ export default function Calc() {
                         placeholder="Gain"
                         value={formData.gain}
                         onChange={handleChange}
-                        className="rounded bg-purple-800/50 text-slate-300 p-3 font-semibold"
+                        className={`rounded bg-[${accent.foreground}] text-slate-300 p-3 font-semibold`}
                         required
                     />
 
@@ -56,43 +62,43 @@ export default function Calc() {
                         placeholder="Spent"
                         value={formData.spent}
                         onChange={handleChange}
-                        className="rounded bg-purple-800/50 text-slate-300 p-3 font-semibold"
+                        className={`rounded bg-[${accent.foreground}] text-slate-300 p-3 font-semibold`}
                         required
                     />
                     <button
                         type="submit"
-                        className="
+                        className={`
                             text-red hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
-                            border-red-400/40 rounded px-3 text-slate-300 shadow-sm transition-all 
+                            border-[${accent.accent}] rounded px-3 text-slate-300 shadow-sm transition-all 
                             before:absolute before:bottom-0 before:left-0 before:top-0 
-                            before:z-0 before:h-full before:w-0 before:bg-red-400/40 
+                            before:z-0 before:h-full before:w-0 before:bg-[${accent.accent}] 
                             before:transition-all before:duration-100 
-                            hover:text-white hover:shadow-red-400/50 hover:before:left-0 
+                            hover:text-black hover:shadow-[${accent.accent}] hover:before:left-0 
                             hover:before:w-full
-                            ">
+                            `}>
                         Calculate
                     </button>
                 </div>
             </form>
 
-            <div className="grid grid-cols-3 mt-20 bg-slate-600/10 p-12 rounded-lg gap-24">
+            <div className={`grid grid-cols-3 mt-20 bg-[${accent.foreground}] p-12 rounded-lg gap-24`}>
                 <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
-                    <p className="text-center text-zinc-300/70 text-xl">Net Gain</p>
+                    <p className={`text-center text-[${accent.text}] text-xl`}>Net Gain</p>
                     <p className="text-center text-5xl">
                         {net}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70">kCal</p>
+                    <p className={`text-center text-sm text-[${accent.text}]`}>kCal</p>
                 </div>
                 <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
-                    <p className="text-center text-zinc-300/70 text-xl">Remaining</p>
+                    <p className={`text-center text-[${accent.text}] text-xl`}>Remaining</p>
                     <p className="text-center text-5xl">
                         {remaining}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70">kCal</p>
+                    <p className={`text-center text-sm text-[${accent.text}]`}>kCal</p>
                 </div>
                 <button 
             onClick={handleCalcClear} 
-            className={` ${isEnabled ? 'text-red hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold  border-red-400/40 rounded px-3 text-slate-300 shadow-sm transition-all  before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-red-400/40 before:transition-all before:duration-100 hover:text-white hover:shadow-red-400/50 hover:before:left-0 hover:before:w-full' : 'cursor-not-allowed text-zinc-500'}`}
+            className={` ${isEnabled ? 'text-red hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold border-red-400/40 rounded px-3 text-slate-300 shadow-sm transition-all  before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-red-400/40 before:transition-all before:duration-100 hover:text-white hover:shadow-red-400/50 hover:before:left-0 hover:before:w-full' : 'cursor-not-allowed text-zinc-500'}`}
             disabled={!isEnabled}
             >Clear</button>
             </div>
