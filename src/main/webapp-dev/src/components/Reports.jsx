@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { RechartsDevtools } from '@recharts/devtools';
+import { useTheme } from "../context/ThemeContext";
+import { useAccentColor } from "../context/AccentColorContext";
+import accentColors from "../themes/accentColors";
 import {
     BarChart,
     Bar,
@@ -18,7 +21,10 @@ import {
 
 export default function Reports() {
     const [weeklyStats, setWeeklyStats] = useState([]);
-    const [currentWeekProgress, setCurrentWeekProgress] = useState([])
+    const [currentWeekProgress, setCurrentWeekProgress] = useState([]);
+    const {theme} = useTheme();
+    const {accentColor} = useAccentColor();
+    const accent = accentColors[accentColor][theme];
 
     useEffect(() => {
         axios
@@ -48,41 +54,41 @@ export default function Reports() {
         <>
             <div className="text-center">
                 <p className="text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-zinc-500/30 to-transparent mb-2">Weekly Metrics</p>
-                <div className="grid grid-cols-4 mb-3">
-                    <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className="grid grid-cols-4 mb-3 gap-2">
+                    <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
                     <p className="text-center text-zinc-300/70 text-xl">Current Gain / Limit</p>
                     <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? 'text-red-500' : 'text-green-500'} animate animate-pulse hover:animate-none`}>
                         {currentWeekProgress.currentGain}
                     </p>
                     <p className="text-center text-sm text-zinc-300/70 mt-1">{currentWeekProgress.gainLimit}</p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
                     <p className="text-center text-zinc-300/70 text-xl">Current Spent</p>
                     <p className="text-center text-4xl text-white">
                         {currentWeekProgress.currentSpent}
                     </p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
                     <p className="text-center text-zinc-300/70 text-xl">Remaining Gain</p>
                     <p className="text-center text-4xl text-white">
                         {currentWeekProgress.remainingGain}
                     </p>
                 </div>
-                <div className="grid grid-cols-1 font-semibold bg-zinc-900/40 py-5 rounded-lg shadow-2xl">
+                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
                     <p className="text-center text-zinc-300/70 text-xl">Daily Limit</p>
                     <p className="text-center text-4xl text-white">
                         {currentWeekProgress.dailyLimit}
                     </p>
                 </div>
                 </div>
-                <div className="grid grid-cols-5 font-semibold bg-zinc-900/40 py-2 gap-2">
+                <div className={`grid grid-cols-5 font-semibold bg-[${accent.foreground}] py-2 gap-2`}>
                     <p className="border-r">Week</p>
                     <p className="border-r">Total Gain</p>
                     <p className="border-r">Total Spent</p>
                     <p className="border-r">Total Deficit</p>
                     <p>TFL</p>
                 </div>
-                {weeklyStats.map((ws) => (<div key={ws.id} className="grid grid-cols-5 even:bg-purple-900/30 even:py-1 animate-row">
+                {weeklyStats.map((ws) => (<div key={ws.id} className={`grid grid-cols-5 even:bg-[${accent.foreground}] even:py-1 animate-row mt-2`}>
                     <div className=''>
                         <p><span className='font-bold text-green-600/80'>{ws.week}</span> {new Date(ws.startDate).toLocaleDateString("en-GB", {
                             day: "numeric",
@@ -101,7 +107,7 @@ export default function Reports() {
                     <p>{ws.weeklyLoss.toFixed(2)}</p>
                 </div>
                 ))}
-                <div className="grid grid-cols-5 font-semibold bg-zinc-900/40 py-2 gap-2 shadow-lg">
+                <div className={`grid grid-cols-5 font-semibold bg-[${accent.foreground}] py-2 gap-2 shadow-lg mt-3`}>
                     <p className="border-r">Week</p>
                     <p className="border-r">Total Gain</p>
                     <p className="border-r">Total Spent</p>

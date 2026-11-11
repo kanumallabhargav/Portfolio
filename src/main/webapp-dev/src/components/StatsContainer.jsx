@@ -6,6 +6,9 @@ import Calc from "./Calc";
 import History from "./History";
 import Reports from "./Reports.jsx";
 import Terminal from "./Terminal.jsx";
+import { useTheme } from "../context/ThemeContext.jsx";
+import { useAccentColor } from "../context/AccentColorContext.jsx";
+import accentColors from "../themes/accentColors.js";
 
 export default function StatsContainer() {
     const [statView, setStatView] = useState('data')
@@ -23,25 +26,20 @@ export default function StatsContainer() {
         terminal: <Terminal />
     }
 
-    const [selectedValue, setSelectedValue] = useState('v1');
+    const {theme} = useTheme();
+    const {accentColor} = useAccentColor();
+    const accent = accentColors[accentColor][theme];
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
     };
 
     return (
-        <div className="text-zinc-300 nav-container">
-            <select value={selectedValue} onChange={handleChange}
-            className="text-black w-12 rounded-md bg-slate-300/50 align-super mr-5"
-            >
-                <option value="v1" className="">v1</option>
-                <option value="v2">v2</option>
-                <option value="v3">v3</option>
-            </select>
+        <div className={`text-[${accent.text}] nav-container`}>
             <button
                 className={`
                     hover:border-yellow-300 p-1 mr-3 rounded-md
-                    ${statView === 'data' ? 'bg-purple-800/80' : 'bg-transparent'}
+                    ${statView === 'data' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('data') }}>
                 <IconData />
@@ -49,7 +47,7 @@ export default function StatsContainer() {
             <button
                 className={`
                     hover:border-yellow-300 p-1 mr-3 rounded-md
-                    ${statView === 'charts' ? 'bg-purple-800/80' : 'bg-transparent'}
+                    ${statView === 'charts' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('charts') }}>
                 <IconCharts />
@@ -57,7 +55,7 @@ export default function StatsContainer() {
             <button
                 className={`
                     hover:border-yellow-300 p-1 mr-3 rounded-md
-                    ${statView === 'calc' ? 'bg-purple-800/80' : 'bg-transparent'}
+                    ${statView === 'calc' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('calc') }}>
                 <IconCalc />
@@ -65,7 +63,7 @@ export default function StatsContainer() {
             <button
                 className={`
                     hover:border-yellow-300 p-1 mr-3 mb-4 rounded-md
-                    ${statView === 'history' ? 'bg-purple-800/80' : 'bg-transparent'}
+                    ${statView === 'history' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('history') }}>
                 <IconHistory />
@@ -73,7 +71,7 @@ export default function StatsContainer() {
             <button
                 className={`
                     hover:border-yellow-300 p-1 mr-3 mb-4 rounded-md
-                    ${statView === 'reports' ? 'bg-purple-800/80' : 'bg-transparent'}
+                    ${statView === 'reports' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('reports') }}>
                 <IconReports />
@@ -81,7 +79,7 @@ export default function StatsContainer() {
             <button
                 className={`
                     hover:border-yellow-300 p-1 mr-3 mb-4 rounded-md
-                    ${statView === 'terminal' ? 'bg-purple-800/80' : 'bg-transparent'}
+                    ${statView === 'terminal' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('terminal') }}>
                 <IconTerminal />

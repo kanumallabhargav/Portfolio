@@ -424,6 +424,8 @@ export default function PlayGround() {
         <div className="bg-white rounded-l-full"></div>
         <div className="bg-red-400 rounded-r-full"></div>
       </div>
+
+      <p className={`text-[${accent.text}]`}>Test this </p>
     </>
   )
 }
