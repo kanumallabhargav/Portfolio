@@ -33,8 +33,8 @@ export default function About() {
                     <IconJava/>
                 </div>
                 <div className="grid-cols-1">
-                    <p className="text-black font-semibold">Backend Development</p>
-                    <p className="text-zinc-800">
+                    <p className={`text-[${accent.text}] font-semibold`}>Backend Development</p>
+                    <p className={`text-[${accent.text}]`}>
                         <DescriptioonBackendDev/>
                     </p>
                 </div>
@@ -45,8 +45,8 @@ export default function About() {
                     <IconReact/>
                 </div>
                 <div className="grid-cols-1">
-                    <p className="text-black font-semibold">UI Development</p>
-                    <p className="text-zinc-800">
+                    <p className={`text-[${accent.text}] font-semibold`}>UI Development</p>
+                    <p className={`text-[${accent.text}]`}>
                         <DescriptionUIDev/>
                     </p>
                 </div>
@@ -57,8 +57,8 @@ export default function About() {
                     <IconAWS/>
                 </div>
                 <div className="grid-cols-1">
-                    <p className="text-black font-semibold">Cloud & DevOps</p>
-                    <p className="text-zinc-800">
+                    <p className={`text-[${accent.text}] font-semibold`}>Cloud & DevOps</p>
+                    <p className={`text-[${accent.text}]`}>
                         <DescriptionCloud/>
                     </p>
                 </div>
@@ -69,8 +69,8 @@ export default function About() {
                     <IconSQL/>
                 </div>
                 <div className="grid-cols-1">
-                    <p className="text-black font-semibold">Database & SQL</p>
-                    <p className="text-zinc-800">
+                    <p className={`text-[${accent.text}] font-semibold`}>Database & SQL</p>
+                    <p className={`text-[${accent.text}]`}>
                         <DescriptionSQL/>
                     </p>
                 </div>

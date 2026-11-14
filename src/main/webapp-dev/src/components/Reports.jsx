@@ -53,30 +53,30 @@ export default function Reports() {
     return (
         <>
             <div className="text-center">
-                <p className="text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-zinc-500/30 to-transparent mb-2">Weekly Metrics</p>
+                <p className={`text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-[${accent.foreground}] to-transparent mb-5`}>Weekly Metrics</p>
                 <div className="grid grid-cols-4 mb-3 gap-2">
                     <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className="text-center text-zinc-300/70 text-xl">Current Gain / Limit</p>
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Gain / Limit</p>
                     <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? 'text-red-500' : 'text-green-500'} animate animate-pulse hover:animate-none`}>
                         {currentWeekProgress.currentGain}
                     </p>
-                    <p className="text-center text-sm text-zinc-300/70 mt-1">{currentWeekProgress.gainLimit}</p>
+                    <p className={`text-center text-sm text-[${accent.text}]/70 mt-1`}>{currentWeekProgress.gainLimit}</p>
                 </div>
                 <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className="text-center text-zinc-300/70 text-xl">Current Spent</p>
-                    <p className="text-center text-4xl text-white">
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Spent</p>
+                    <p className={`text-center text-4xl text-[${accent.text}]`}>
                         {currentWeekProgress.currentSpent}
                     </p>
                 </div>
                 <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className="text-center text-zinc-300/70 text-xl">Remaining Gain</p>
-                    <p className="text-center text-4xl text-white">
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Remaining Gain</p>
+                    <p className={`text-center text-4xl text-[${accent.text}]`}>
                         {currentWeekProgress.remainingGain}
                     </p>
                 </div>
                 <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className="text-center text-zinc-300/70 text-xl">Daily Limit</p>
-                    <p className="text-center text-4xl text-white">
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Daily Limit</p>
+                    <p className={`text-center text-4xl text-[${accent.text}]`}>
                         {currentWeekProgress.dailyLimit}
                     </p>
                 </div>
@@ -116,8 +116,8 @@ export default function Reports() {
                 </div>
             </div>
             <div className="flex flex-col mt-20">
-                <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md">Weekly Deficit Trends</p>
-                <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
+                <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Weekly Deficit Trends</p>
+                <div className="rounded-xl pt-4 pr-4 shadow-md">
                     <ResponsiveContainer width="100%" height={600}>
                         <BarChart
                             data={weeklyStats}
@@ -156,8 +156,8 @@ export default function Reports() {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md mt-5">Weekly Loss Distribution</p>
-                <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
+                <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Weekly Loss Distribution</p>
+                <div className="rounded-xl pt-4 pr-4 shadow-md">
                     <LineChart
                         style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
                         responsive
@@ -174,13 +174,13 @@ export default function Reports() {
                         <YAxis width="auto" />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="weeklyLoss" strokeDasharray="2 2" />
+                        <Line type="monotone" dataKey="weeklyLoss" strokeDasharray="2 2" stroke={accent.text}/>
                         <RechartsDevtools />
                     </LineChart>
                 </div>
                 <div className="grid grid-cols-2 mt-5 gap-5">
-                    <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
-                        <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md mt-5">Gain Distribution</p>
+                    <div className="rounded-xl pt-4 pr-4 shadow-md">
+                        <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Gain Distribution</p>
                         <LineChart
                             style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
                             responsive
@@ -203,12 +203,12 @@ export default function Reports() {
                                 strokeWidth={2}
                                 label={{ value: 'Threshold', fill: 'red', position: 'left' }}
                             />
-                            <Line type="monotone" dataKey="totalGain" strokeDasharray="2 2" />
+                            <Line type="monotone" dataKey="totalGain" strokeDasharray="2 2" stroke={accent.text} />
                             <RechartsDevtools />
                         </LineChart>
                     </div>
-                    <div className="bg-zinc-900/50 rounded-xl pt-4 pr-4 shadow-md">
-                        <p className="border-l-2 px-4 ml-4 font-semibold mb-2 bg-purple-900/40 w-fit py-1 rounded-full border-l-red-400/40 shadow-md mt-5">Spent Distribution</p>
+                    <div className="rounded-xl pt-4 pr-4 shadow-md">
+                        <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Spent Distribution</p>
                         <LineChart
                             style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
                             responsive
@@ -225,7 +225,7 @@ export default function Reports() {
                             <YAxis width="auto" />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="totalSpent" strokeDasharray="2 2" />
+                            <Line type="monotone" dataKey="totalSpent" strokeDasharray="2 2" stroke={accent.text}/>
                             <RechartsDevtools />
                         </LineChart>
                     </div>

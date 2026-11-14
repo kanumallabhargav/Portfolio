@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 
 
-export default function NetGainChart() {
+export default function NetGainChart({theme}) {
     const [netGainData, setNetGainData] = useState([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function NetGainChart() {
       <Line
         type="monotone"
         dataKey="netGain"
-        stroke="#fff"
+        stroke={theme}
         dot={{
           fill: '#F56527',
         }}

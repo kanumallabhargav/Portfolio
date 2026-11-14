@@ -23,7 +23,7 @@ export default function History() {
 
     return (
         <div className="grid grid-cols-1 gap-2 text-center">
-            <p className="text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-zinc-500/30 to-transparent mb-2">Historical Data</p>
+            <p className={`text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-[${accent.foreground}] to-transparent`}>Historical Data</p>
             <div className={`grid grid-cols-5 font-semibold bg-[${accent.foreground}] py-2`}>
                 <p className="border-r">Date</p>
                 <p className="border-r">Total Fat Loss<p className={`text-sm text-[${accent.text}] font-light`}>kCal</p></p>

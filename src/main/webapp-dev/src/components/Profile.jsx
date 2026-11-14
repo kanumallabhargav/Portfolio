@@ -31,7 +31,6 @@ const handleX = () => {
 export default function Profile() {
     const [selectedTopic, setSelectedTopic] = useState('about');
     const {theme} = useTheme();
-
     const {accentColor} = useAccentColor();
     const accent = accentColors[accentColor][theme];
 
@@ -75,25 +74,25 @@ export default function Profile() {
                                 <div className="bg-slate-400/50 p-2 rounded-lg">
                                     <IconPosition/>
                                 </div>
-                                <p className="font-semibold text-black text-xs items-center">Full Stack Developer</p>
+                                <p className={`font-semibold text-[${accent.text}] text-xs items-center`}>Full Stack Developer</p>
                             </div>
                             <div className="flex gap-5 px-5 mt-6 items-center">
                                 <div className="bg-slate-400/50 p-2 rounded-lg">
                                     <IconPhone/>
                                 </div>
-                                <p className="text-black text-xs">+91 7032 252923</p>
+                                <p className={`text-[${accent.text}] text-xs`}>+91 7032 252923</p>
                             </div>
                             <div className="flex gap-5 px-5 mt-6 pt-2 items-center">
                                 <div className="bg-slate-400/50 p-2 rounded-lg">
                                     <IconLocation/>
                                 </div>
-                                <p className="text-black text-xs">Hyderabad</p>
+                                <p className={`text-[${accent.text}] text-xs`}>Hyderabad</p>
                             </div>
                             <div className="flex gap-5 px-5 mt-6 items-center">
                                 <div className="bg-slate-400/50 p-2 rounded-lg">
                                     <IconEducation/>
                                 </div>
-                                <p className="text-black text-xs">University of Illinois</p>
+                                <p className={`text-[${accent.text}] text-xs`}>University of Illinois</p>
                             </div>
                         </div>
                         <div className="flex justify-center">
@@ -120,11 +119,11 @@ export default function Profile() {
                 className="mr-12 rounded-lg h-[20rem] w-24 flex flex-col items-center justify-around list-none shadow-2xl"
                 style={{backgroundColor: accent.foreground}}>
                 <ProfileButton clickHandler={() => clickHandler('about')}
-                               isSelected={selectedTopic === 'about'}> <IconUser/></ProfileButton>
+                               isSelected={selectedTopic === 'about'}> <IconUser theme={selectedTopic === 'about'? accent.textInvert : accent.text}/></ProfileButton>
                 <ProfileButton clickHandler={() => clickHandler('work')}
-                               isSelected={selectedTopic === 'work'}> <IconWork/></ProfileButton>
+                               isSelected={selectedTopic === 'work'}> <IconWork theme={selectedTopic === 'work'? accent.textInvert : accent.text}/></ProfileButton>
                 <ProfileButton clickHandler={() => clickHandler('skills')}
-                               isSelected={selectedTopic === 'skills'}> <IconSkills/></ProfileButton>
+                               isSelected={selectedTopic === 'skills'}> <IconSkills theme={selectedTopic === 'skills'? accent.textInvert : accent.text}/></ProfileButton>
             </div>
         </div>
     );

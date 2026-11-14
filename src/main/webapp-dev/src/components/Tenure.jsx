@@ -163,20 +163,20 @@ export default function Tenure() {
             <div className={`text-[${accent.text}] bg-[${accent.foreground}] py-8 px-28 rounded-lg`}>
                 <ul className="list-['❯❯'] pl-5 marker:text-red-400/70">
                     <li className="pl-3"><span
-                        className={`bg-purple-800/80 text-[${accent.text}] font-semibold px-1.5 rounded-md`}>Zen3</span> Record
+                        className={`bg-purple-800/80 text-white font-semibold px-1.5 rounded-md`}>Zen3</span> Record
                         break on 8 Sep 2025
                     </li>
                     <li className="pl-3"><span
-                        className={`bg-purple-800/80 text-[${accent.text}] font-semibold px-1.5 rounded-md`}>Sportsplus</span> Record
+                        className={`bg-purple-800/80 text-white font-semibold px-1.5 rounded-md`}>Sportsplus</span> Record
                         break on 28 Feb 2026
                     </li>
                     <li className="pl-3">Worked in <span
-                        className={`bg-purple-800/80 text-[${accent.text}] font-semibold px-1.5 rounded-md`}>CShare</span> as
+                        className={`bg-purple-800/80 text-white font-semibold px-1.5 rounded-md`}>CShare</span> as
                         a QA for exactly the same number of days as total Sportsplus tenure
                     </li>
                     <li className="pl-3">Been a QA for 5Y 16D / 1843D</li>
                     <li className="pl-3">Officially a <span
-                        className={`bg-red-500/70 text-white font-semibold px-1.5 rounded-md`}>Full Stack Developer</span> from
+                        className={`bg-red-600/70 text-white font-semibold px-1.5 rounded-md`}>Full Stack Developer</span> from
                         1 Mar 2026
                     </li>
                 </ul>
