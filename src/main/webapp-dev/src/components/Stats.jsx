@@ -151,7 +151,7 @@ export default function Stats() {
     return (
         <div className="select-none">
             <div className="grid grid-cols-1 gap-4">
-                <p className="text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-zinc-500/30 to-transparent">Stats</p>
+                <p className={`text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-[${accent.foreground}] to-transparent`}>Stats</p>
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-5 gap-2">
                         <input
@@ -260,25 +260,25 @@ export default function Stats() {
             </div>
             <div className="grid grid-cols-3 mt-12 gap-3">
                 <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
-                    <p className={`text-center text-[${accent.text}] text-xl`}>Total Fat Loss</p>
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Total Fat Loss</p>
                     <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {history.tfl}
                     </p>
-                    <p className={`text-center text-sm text-[${accent.text}]`}>kCal</p>
+                    <p className={`text-center text-sm text-[${accent.text}]/70`}>kCal</p>
                 </div>
                 <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
-                    <p className={`text-center text-[${accent.text}] text-xl`}>Current Loss</p>
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Loss</p>
                     <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {history.cl}
                     </p>
-                    <p className={`text-center text-sm text-[${accent.text}]`}>kg</p>
+                    <p className={`text-center text-sm text-[${accent.text}]/70`}>kg</p>
                 </div>
                 <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
-                    <p className={`text-center text-[${accent.text}] text-xl`}>Adjusted Loss</p>
+                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Adjusted Loss</p>
                     <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {calcLoss}
                     </p>
-                    <p className={`text-center text-sm text-[${accent.text}]`}>kg</p>
+                    <p className={`text-center text-sm text-[${accent.text}]/70`}>kg</p>
                 </div>
             </div>
         </div>

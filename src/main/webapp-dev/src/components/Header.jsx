@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {IconUpArrow, IconDownArrow, IconSettings} from '../assets/static/Icons'
 import Logo from '../assets/static/logo.png';
+import LogoDark from '../assets/static/logo-dark.png';
 import SettingsMenu from './SettingsMenu';
 import {useTheme} from '../context/ThemeContext';
 import {useAccentColor} from '../context/AccentColorContext';
@@ -36,31 +37,30 @@ export default function Header() {
                     mx-12 mt-3 px-10 h-8
                     rounded-full
                     fixed top-0 inset-x-0 z-50
-                    flex items-center text-xl justify-between`}
-        style={{backgroundColor: accent.header}}
+                    flex items-center text-xl justify-between bg-[${accent.header}]/80`}
     >
     <span className='mt-1'>
-      <img src={Logo} alt="Company Logo" width="190"/>
+      <img src={theme === 'light' ? LogoDark : Logo} alt="Company Logo" width="190"/>
     </span>
         <div className='pt-1.5'>
-            <button className='mr-1.5
-                        hover:bg-red-400/30 active:bg-red-400/20
-                        rounded-full p-0.5'
+            <button className={`mr-1.5
+                        hover:bg-[${accent.accent}]/30 active:bg-[${accent.accent}]/20
+                        rounded-full p-0.5`}
                     onClick={scrollToTop}
             >
-                <IconUpArrow/>
+                <IconUpArrow theme={accent.text}/>
             </button>
-            <button className='hover:bg-red-400/30 active:bg-red-400/20
-                        rounded-full p-0.5'
+            <button className={`hover:bg-[${accent.accent}]/30 active:bg-[${accent.accent}]/20
+                        rounded-full p-0.5`}
                     onClick={scrollToBottom}
             >
-                <IconDownArrow/>
+                <IconDownArrow theme={accent.text}/>
             </button>
             <button
-                className={`${showMenu ? 'bg-zinc-600' : undefined} ml-5 rounded-full`}
+                className={`${showMenu ? `bg-[${accent.accent}]/30` : undefined} ml-5 rounded-full`}
                 onClick={handleSettingsClick}
             >
-                <IconSettings/>
+                <IconSettings theme={accent.text}/>
             </button>
             <SettingsMenu showMenu={showMenu}/>
         </div>

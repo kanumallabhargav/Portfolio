@@ -43,7 +43,7 @@ export default function Calc() {
 
     return (
         <>
-            <p className="text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-zinc-500/30 to-transparent mb-4">Calculator</p>
+            <p className={`text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-[${accent.foreground}] to-transparent mb-5`}>Calculator</p>
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-3 gap-2">
                     <input
@@ -52,7 +52,7 @@ export default function Calc() {
                         placeholder="Gain"
                         value={formData.gain}
                         onChange={handleChange}
-                        className={`rounded bg-[${accent.foreground}] text-slate-300 p-3 font-semibold`}
+                        className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold`}
                         required
                     />
 
@@ -62,7 +62,7 @@ export default function Calc() {
                         placeholder="Spent"
                         value={formData.spent}
                         onChange={handleChange}
-                        className={`rounded bg-[${accent.foreground}] text-slate-300 p-3 font-semibold`}
+                        className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold`}
                         required
                     />
                     <button

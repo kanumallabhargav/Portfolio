@@ -4,7 +4,7 @@ import { AreaChart, Area, YAxis, XAxis, CartesianGrid, Legend, Tooltip } from 'r
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
-const DeficitTrendChart = () => {
+const DeficitTrendChart = ({theme}) => {
     const [gsData, setGsData] = useState([]);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const DeficitTrendChart = () => {
                 <Area
                     dataKey="deficit"
                     stroke='#FFC405'
-                    fill='#8F7833'
+                    fill={theme}
                     type="monotone" />
             </AreaChart>
     )

@@ -42,7 +42,7 @@ export default function StatsContainer() {
                     ${statView === 'data' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('data') }}>
-                <IconData />
+                <IconData theme={statView === 'data' ? accent.textInvert : accent.text}/>
             </button>
             <button
                 className={`
@@ -50,7 +50,7 @@ export default function StatsContainer() {
                     ${statView === 'charts' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('charts') }}>
-                <IconCharts />
+                <IconCharts theme={statView === 'charts' ? accent.textInvert : accent.text}/>
             </button>
             <button
                 className={`
@@ -58,7 +58,7 @@ export default function StatsContainer() {
                     ${statView === 'calc' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('calc') }}>
-                <IconCalc />
+                <IconCalc theme={statView === 'calc' ? accent.textInvert : accent.text}/>
             </button>
             <button
                 className={`
@@ -66,7 +66,7 @@ export default function StatsContainer() {
                     ${statView === 'history' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('history') }}>
-                <IconHistory />
+                <IconHistory theme={statView === 'history' ? accent.textInvert : accent.text}/>
             </button>
             <button
                 className={`
@@ -74,7 +74,7 @@ export default function StatsContainer() {
                     ${statView === 'reports' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('reports') }}>
-                <IconReports />
+                <IconReports theme={statView === 'reports' ? accent.textInvert : accent.text}/>
             </button>
             <button
                 className={`
@@ -82,7 +82,7 @@ export default function StatsContainer() {
                     ${statView === 'terminal' ? `bg-[${accent.accent}]` : 'bg-transparent'}
                 `}
                 onClick={() => { handleTabViewClick('terminal') }}>
-                <IconTerminal />
+                <IconTerminal theme={statView === 'terminal' ? accent.textInvert : accent.text}/>
             </button>
             {currentTabView[statView]}
         </div>
