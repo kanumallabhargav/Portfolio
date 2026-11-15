@@ -1011,6 +1011,11 @@ export default function PlayGround() {
           </div>
         </div>
       </div>
+
+      <div className="mt-12">
+        <p className={`text-[${styles.success}]`}>gdgd</p>
+        <p className={`text-[${styles.danger}]`}>gdgd</p>
+      </div>
     </>
   )
 }

@@ -2,9 +2,11 @@ import CTCHistoryChart from "./CTCHistoryChart";
 import {useTheme} from '../context/ThemeContext'
 import {useAccentColor} from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
+import { themeSelector } from "../themes/themeSelector";
 
 export default function Tenure() {
     const {theme} = useTheme();
+    const styles = themeSelector(theme);
 
     const {accentColor} = useAccentColor();
     const accent = accentColors[accentColor][theme];
@@ -125,7 +127,7 @@ export default function Tenure() {
                 <div className={`grid grid-cols-5 py-1 bg-[${accent.foreground}]`}>
                     <p className="">CShare</p>
                     <p className="">27 Nov 2023</p>
-                    <p className="text-green-400">- Current -</p>
+                    <p className={`text-[${styles.success}]`}>- Current -</p>
                     <p className="">{`${years}Y ${months}M ${days}D`}</p>
                     <p className="">{`${totalDays}D`}</p>
                 </div>

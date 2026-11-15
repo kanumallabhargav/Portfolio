@@ -1,9 +1,11 @@
 import {useTheme} from "../../context/ThemeContext";
 import {useAccentColor} from "../../context/AccentColorContext";
 import accentColors from "../../themes/accentColors";
+import { themeSelector } from "../../themes/themeSelector";
 
 export default function Work() {
     const {theme} = useTheme();
+    const styles = themeSelector(theme);
 
     const {accentColor} = useAccentColor();
     const accent = accentColors[accentColor][theme];
@@ -36,7 +38,7 @@ export default function Work() {
                 <div className="grid grid-cols-3 py-1">
                     <p className="">CShare</p>
                     <p className="">27 Nov 2023</p>
-                    <p className="text-lime-400/70 font-semibold">- Current -</p>
+                    <p className={`text-[${styles.success}] font-semibold`}>- Current -</p>
                 </div>
             </div>
         </div>
