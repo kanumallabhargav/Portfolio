@@ -68,12 +68,12 @@ export default function Calc() {
                     <button
                         type="submit"
                         className={`
-                            text-red hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
+                            text-[${accent.text}] hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
                             border-[${accent.accent}] rounded px-3 text-slate-300 shadow-sm transition-all 
                             before:absolute before:bottom-0 before:left-0 before:top-0 
-                            before:z-0 before:h-full before:w-0 before:bg-[${accent.accent}] 
+                            before:z-0 before:h-full before:w-0 before:bg-[${accent.accent}]/40 
                             before:transition-all before:duration-100 
-                            hover:text-black hover:shadow-[${accent.accent}] hover:before:left-0 
+                            hover:shadow-[${accent.accent}] hover:before:left-0 
                             hover:before:w-full
                             `}>
                         Calculate

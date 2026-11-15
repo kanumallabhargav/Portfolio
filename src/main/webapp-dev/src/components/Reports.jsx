@@ -4,6 +4,7 @@ import { RechartsDevtools } from '@recharts/devtools';
 import { useTheme } from "../context/ThemeContext";
 import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
+import { themeSelector } from "../themes/themeSelector";
 import {
     BarChart,
     Bar,
@@ -23,6 +24,7 @@ export default function Reports() {
     const [weeklyStats, setWeeklyStats] = useState([]);
     const [currentWeekProgress, setCurrentWeekProgress] = useState([]);
     const {theme} = useTheme();
+    const styles = themeSelector(theme);
     const {accentColor} = useAccentColor();
     const accent = accentColors[accentColor][theme];
 
@@ -57,7 +59,7 @@ export default function Reports() {
                 <div className="grid grid-cols-4 mb-3 gap-2">
                     <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
                     <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Gain / Limit</p>
-                    <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? 'text-red-500' : 'text-green-500'} animate animate-pulse hover:animate-none`}>
+                    <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? `text-[${styles.danger}]` : `text-[${styles.success}]`} animate animate-pulse hover:animate-none`}>
                         {currentWeekProgress.currentGain}
                     </p>
                     <p className={`text-center text-sm text-[${accent.text}]/70 mt-1`}>{currentWeekProgress.gainLimit}</p>
