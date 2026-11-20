@@ -2,8 +2,10 @@ package com.bhargavk.portfolio.service;
 
 import com.bhargavk.portfolio.dto.DeficitTrendDTO;
 import com.bhargavk.portfolio.dto.GainSpendTrendDTO;
+import com.bhargavk.portfolio.dto.LastThirtyDaysSpends;
 import com.bhargavk.portfolio.dto.NetGainChartDTO;
 import com.bhargavk.portfolio.repository.StatsRepository;
+import com.bhargavk.portfolio.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -63,5 +65,9 @@ public class ChartsService {
             );
         }
         return toReturn;
+    }
+
+    public List<LastThirtyDaysSpends> getAllOneMonthSpends() {
+        return statsRepository.getAllSpent(DateUtils.thirtyDaysAgo());
     }
 }

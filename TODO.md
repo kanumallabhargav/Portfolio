@@ -8,7 +8,7 @@
 - ~~Chart colors~~
 - ~~Readjust all colors~~
 - ~~More color options~~ 
-- Daily spent graph
+- ~~Daily spent graph~~
 - Date range selection for charts
 - ~~BugFix: Form submit button text color~~
 - BugFix: row-animator

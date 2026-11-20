@@ -1,9 +1,6 @@
 package com.bhargavk.portfolio.controller;
 
-import com.bhargavk.portfolio.dto.DeficitTrendDTO;
-import com.bhargavk.portfolio.dto.GainSpendTrendDTO;
-import com.bhargavk.portfolio.dto.NetGainChartDTO;
-import com.bhargavk.portfolio.dto.TflGoalChartDTO;
+import com.bhargavk.portfolio.dto.*;
 import com.bhargavk.portfolio.service.ChartsService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,5 +42,10 @@ public class ChartsController {
     @GetMapping("/net-gain")
     public List<NetGainChartDTO> getNetGain() {
         return chartsService.calcNetGains();
+    }
+
+    @GetMapping("/last-thirty-days")
+    public List<LastThirtyDaysSpends> getPreviousThirtyDatsSpent() {
+        return chartsService.getAllOneMonthSpends();
     }
 }
