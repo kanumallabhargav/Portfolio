@@ -2,10 +2,18 @@ import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'r
 import { RechartsDevtools } from '@recharts/devtools';
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import { useTheme } from '../context/ThemeContext';
+import { themeSelector } from '../themes/themeSelector';
+import { useAccentColor } from '../context/AccentColorContext';
+import accentColors from '../themes/accentColors';
 
 
-export default function NetGainChart({theme}) {
+export default function NetGainChart() {
     const [netGainData, setNetGainData] = useState([]);
+    const { theme } = useTheme();
+    const styles = themeSelector(theme);
+    const { accentColor } = useAccentColor();
+    const accent = accentColors[accentColor][theme];
 
   useEffect(() => {
         axios
@@ -25,17 +33,17 @@ export default function NetGainChart({theme}) {
       data={netGainData}
     >
       <CartesianGrid strokeDasharray="2 2" stroke="#6E6E6E" />
-      <XAxis dataKey="name" padding={{ left: 30, right: 30 }} stroke="#DEDEDE" />
-      <YAxis width="auto" stroke="#DEDEDE" />
+      <XAxis dataKey="name" padding={{ left: 30, right: 30 }} stroke={accent.text} />
+      <YAxis width="auto" stroke={accent.text} />
       <Tooltip
         cursor={{ stroke: '#13EB2C' }}
-        contentStyle={{ backgroundColor: '#383838', borderColor: '#fff' }}
+        contentStyle={{ backgroundColor: `${accent.foreground}`, borderColor: '#fff' }}
       />
       <Legend />
       <Line
         type="monotone"
         dataKey="netGain"
-        stroke={theme}
+        stroke={accent.text}
         dot={{
           fill: '#F56527',
         }}

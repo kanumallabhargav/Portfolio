@@ -17,6 +17,10 @@ public class DateUtils {
         return getCurrentDate().minusDays(1);
     }
 
+    public static LocalDate thirtyDaysAgo() {
+        return getCurrentDate().minusDays(30);
+    }
+
     public static int getCurrentWeek() {
         return getCurrentDate().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
     }

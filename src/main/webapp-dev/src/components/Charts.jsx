@@ -2,6 +2,7 @@ import DeficitTrendChart from './DeficitTrendChart'
 import GainSpendChart from './GainSpendChart'
 import NetGainChart from './NetGainChart'
 import TflGoalChart from './TflGoalChart'
+import LastThirtyDaysSpends from './LastThirtyDaysSpends'
 import { useTheme } from '../context/ThemeContext'
 import { useAccentColor } from '../context/AccentColorContext'
 import accentColors from '../themes/accentColors'
@@ -40,6 +41,7 @@ export default function Charts() {
                     </div>
                 </div>
             </div>
+            <LastThirtyDaysSpends />
         </div>
     )
 }
