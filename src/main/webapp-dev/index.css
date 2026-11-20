@@ -1,4 +1,20 @@
+/* LIGHT THEME */
+html[data-theme="light"] {
+    --purple: #c084fcaf;
+    --red: #fca5a5af;
+    --blue: #93c4fdad;
+    --green: #86efada4;
+    --yellow: #fde68aab;
+}
 
+/* DARK THEME */
+html[data-theme="dark"] {
+    --purple: #7e22ceab;
+    --red: #be123da9;
+    --blue: #1d4fd8af;
+    --green: rgba(4, 120, 4, 0.664);
+    --yellow: #b45309af;
+}
 
 .bg-animation-container {
     min-height: 100vh;
@@ -30,13 +46,13 @@
 .an-el-one {
     height: 100%;
     width: 100%;
-    background-color: pink;
+    background-color: var(--purple);
 }
 
 .an-el-two {
     height: 80%;
     width: 70%;
-    background-color: purple;
+    background-color: var(--red);
     top: -12%;
     right: -12%;
     animation-delay: 2s;
@@ -45,7 +61,7 @@
 .an-el-three {
     height: 50%;
     width: 50%;
-    background-color: rgb(219, 3, 39);
+    background-color: var(--blue);
     bottom: -10%;
     left: -5%;
     animation-delay: 1s;
@@ -54,7 +70,7 @@
 .an-el-four {
     height: 65%;
     width: 80%;
-    background-color: rgb(34, 231, 133);
+    background-color: var(--green);
     bottom: 15%;
     left: -20%;
     animation-delay: 3s;
@@ -63,7 +79,7 @@
 .an-el-five {
     height: 70%;
     width: 65%;
-    background-color: rgb(35, 124, 207);
+    background-color: var(--yellow);
     bottom: 0;
     left: -50%;
     animation-delay: 1s;

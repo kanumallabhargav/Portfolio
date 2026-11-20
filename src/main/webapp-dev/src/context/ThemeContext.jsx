@@ -23,6 +23,10 @@ export function ThemeProvider({children}) {
         localStorage.setItem('theme', theme)
     }, [theme])
 
+    useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+}, [theme]);
+
     return (
         <ThemeContext.Provider value={{theme, setTheme, toggleTheme}}>
             {children}
