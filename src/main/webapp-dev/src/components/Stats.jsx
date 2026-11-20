@@ -224,7 +224,7 @@ export default function Stats() {
                             </th>
                         ))}
                     </div>
-                    {sortedStats.map((stat) => (<div key={stat.id} className={`grid grid-cols-6 even:bg-[${accent.foreground}] even:py-1 animate-row text-[${accent.text}]`}>
+                    {sortedStats.map((stat) => (<div key={stat.id} className={`grid grid-cols-6 even:bg-[${accent.foreground}] even:py-1 odd:bg-[${accent.background}]/50 animate-row text-[${accent.text}]`}>
                         <div className="grid grid-cols-2 text-center">
                             <div className="text-right pr-3">
                                 {new Date(stat.statDate).toLocaleDateString("en-US", {

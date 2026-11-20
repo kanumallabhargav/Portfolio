@@ -5,19 +5,21 @@ import ContentHelper from "./ContentHelper";
 import {useTheme} from "../context/ThemeContext";
 import {useAccentColor} from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
+import { useGrade } from "../context/GlassContext";
 
 export default function Body() {
     const [selectedTopic, setSelectedTopic] = useState('profile');
     const {theme} = useTheme();
     const {accentColor} = useAccentColor();
     const accent = accentColors[accentColor][theme];
+    const {grade} = useGrade();
 
     function clickHandler(selectedButton) {
         setSelectedTopic(selectedButton);
     }
 
     return (
-        <div className={`mx-24 my-24 rounded-xl p-12 bg-[${accent.background}]/70`}>
+        <div className={`mx-24 my-24 rounded-xl p-12 ${grade === `fg` ? `bg-[${accent.background}]/70` : 'liquid-glass'}`}>
             <menu className={`flex gap-4 mb-10 w-fit rounded-full`}
                   style={{backgroundColor: accent.foreground, color: accent.text}}>
                 <TabButton clickHandler={() => clickHandler('profile')}

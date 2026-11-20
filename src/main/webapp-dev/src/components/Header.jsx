@@ -6,12 +6,14 @@ import SettingsMenu from './SettingsMenu';
 import {useTheme} from '../context/ThemeContext';
 import {useAccentColor} from '../context/AccentColorContext';
 import accentColors from '../themes/accentColors';
+import { useGrade } from '../context/GlassContext';
 
 export default function Header() {
     const [showMenu, setShowMenu] = useState(false)
     const {theme} = useTheme();
     const {accentColor} = useAccentColor();
     const accent = accentColors[accentColor][theme];
+    const {grade} = useGrade();
 
     const scrollToBottom = () => {
         window.scrollTo({
@@ -37,7 +39,8 @@ export default function Header() {
                     mx-12 mt-3 px-10 h-8
                     rounded-full
                     fixed top-0 inset-x-0 z-50
-                    flex items-center text-xl justify-between bg-[${accent.header}]/80 backdrop-blur-sm`}
+                    flex items-center text-xl justify-between
+                    ${grade === `fg` ? `bg-[${accent.header}]/80 backdrop-blur-sm` : 'liquid-glass'}`}
     >
     <span className='mt-1'>
       <img src={theme === 'light' ? LogoDark : Logo} alt="Company Logo" width="190"/>
