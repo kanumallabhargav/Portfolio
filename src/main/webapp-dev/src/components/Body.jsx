@@ -17,7 +17,7 @@ export default function Body() {
     }
 
     return (
-        <div className={`mx-24 my-24 rounded-xl p-12`} style={{backgroundColor: accent.background}}>
+        <div className={`mx-24 my-24 rounded-xl p-12 bg-[${accent.background}]/70`}>
             <menu className={`flex gap-4 mb-10 w-fit rounded-full`}
                   style={{backgroundColor: accent.foreground, color: accent.text}}>
                 <TabButton clickHandler={() => clickHandler('profile')}
