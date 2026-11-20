@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { themeSelector } from "../themes/themeSelector";
 import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 
 export default function PlayGround() {
   const { theme } = useTheme();
@@ -10,6 +12,7 @@ export default function PlayGround() {
 
   const { accentColor } = useAccentColor();
   const accent = accentColors[accentColor][theme];
+  const [selected, setSelected] = useState();
 
 
   useEffect(() => {
@@ -1015,6 +1018,18 @@ export default function PlayGround() {
       <div className="mt-12">
         <p className={`text-[${styles.success}]`}>gdgd</p>
         <p className={`text-[${styles.danger}]`}>gdgd</p>
+      </div>
+
+      <div className="mt-12 border-2 backdrop-blur-3xl">
+        <DayPicker
+        animate
+        mode="single"
+        selected={selected}
+        onSelect={setSelected}
+        footer={
+          selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
+        }
+        />
       </div>
     </>
   )

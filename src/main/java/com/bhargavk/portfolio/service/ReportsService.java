@@ -52,7 +52,7 @@ public class ReportsService {
             weeklyStats.setWeeklyLoss((double) statsRepository.getWeeklyDeficit(weeklyStats.getStartDate()) / Constants.KILO_CALS);
 
             weeklyStatsRepository.save(weeklyStats);
-            log.info("Stats updated for week: {}", DateUtils.getCurrentWeek());
+            log.info("Stats updated for week: {}", DateUtils.getCurrentWeek()-1);
             return;
         }
         log.info("Skipping weekly stat update...");
