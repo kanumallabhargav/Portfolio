@@ -46,24 +46,24 @@ export default function Profile() {
                          style={{backgroundColor: accent.foreground}}>
                         &nbsp;
                         <div className="mt-36 flex justify-around mx-10">
-                            <button className="h-10 w-10 rounded-full bg-slate-300/40
-                                                hover:bg-red-400/50 
+                            <button className={`h-10 w-10 rounded-full bg-slate-300/40
+                                                hover:bg-[${accent.accent}]/50
                                                 active:bg-slate-500 
-                                                flex flex-col items-center justify-center">
+                                                flex flex-col items-center justify-center`}>
                                 <span><IconEmail/></span>
                             </button>
-                            <button className="h-10 w-10 rounded-full bg-slate-300/40
-                                                hover:bg-red-400/50 
+                            <button className={`h-10 w-10 rounded-full bg-slate-300/40
+                                                hover:bg-[${accent.accent}]/50 
                                                 active:bg-slate-500 
-                                                flex flex-col items-center justify-center"
+                                                flex flex-col items-center justify-center`}
                                     onClick={handleX}
                             >
                                 <span><IconX/></span>
                             </button>
-                            <button className="h-10 w-10 rounded-full bg-slate-300/40
-                                                hover:bg-red-400/50  
+                            <button className={`h-10 w-10 rounded-full bg-slate-300/40
+                                                hover:bg-[${accent.accent}]/50  
                                                 active:bg-slate-500 
-                                                flex flex-col items-center justify-center"
+                                                flex flex-col items-center justify-center`}
                                     onClick={handleLinkedIn}
                             >
                                 <span><IconLinkedIn/></span>
@@ -97,7 +97,7 @@ export default function Profile() {
                         </div>
                         <div className="flex justify-center">
                             <button
-                                className="flex gap-2 px-4 py-2 rounded-xl shadow-md active:shadow-inner"
+                                className={`flex gap-2 px-4 py-2 rounded-xl shadow-md active:shadow-inner hover:bg-[${accent.background}]/50`}
                                 style={{backgroundColor: accent.background, color: accent.text}}>
                                 <span><IconDownload/></span>Download Resume
                             </button>
