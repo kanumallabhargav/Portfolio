@@ -1,7 +1,7 @@
 export const DescriptionAbout = () => {
     return(
         <>
-        I'm a Full-Stack Developer with a strong foundation in software engineering, specializing in building scalable backend systems, intuitive user interfaces, and reliable web applications. With experience spanning development, cloud infrastructure, and quality engineering, I bring a well-rounded perspective to the entire software development lifecycle.
+        I'm a Full-Stack Developer with a strong foundation in software engineering, specializing in building scalable backend systems, intuitive user interfaces, and reliable web applications. With experience spanning development, cloud infrastructure, and quality engineering
         </>
     )
 }
@@ -9,7 +9,7 @@ export const DescriptionAbout = () => {
 export const DescriptionAboutFooter = () => {
     return (
         <>
-        I enjoy solving complex problems, exploring new technologies, and turning ideas into practical, maintainable solutions. My approach combines clean code, thoughtful design, and a quality-first mindset to build software that's not just functional, but reliable and built to last.
+        I enjoy solving complex problems, exploring new technologies, and turning ideas into practical, maintainable solutions. My approach combines clean code, thoughtful design, and a quality-first mindset to build software that's functional, reliable, and built to last.
         </>
     )
 }
@@ -41,7 +41,7 @@ export const DescriptionCloud = () => {
 export const DescriptionSQL = () => {
     return(
         <>
-        Designing efficient queries, managing relational data, and optimizing DB operations for reliable, high-performance applications.
+        Designing efficient queries, managing relational data, and optimizing DB operations for high-performance applications.
         </>
     )
 }

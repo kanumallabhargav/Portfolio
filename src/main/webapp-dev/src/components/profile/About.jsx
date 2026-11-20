@@ -25,7 +25,7 @@ export default function About() {
         <p className="mt-2" style={{color: accent.text}}>
             <DescriptionAboutFooter/>
         </p>
-        <p className="mt-8 text-3xl font-semibold" style={{color: accent.text}}> What I do</p>
+        <p className="mt-5 text-3xl font-semibold" style={{color: accent.text}}> What I do</p>
         <div className='grid grid-cols-2'>
             <div
                 className="grid grid-cols-[15%_85%] rounded-lg p-2 m-4 items-center shadow-2xl my-animation bg-slate-300/20">

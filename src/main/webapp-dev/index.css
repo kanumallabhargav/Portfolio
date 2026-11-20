@@ -123,7 +123,7 @@ html[data-theme="dark"] {
 }
 
 /* Keep actual content above the glass overlay */
-.liquid-glass > * {
+.liquid-glass>* {
     position: relative;
     z-index: 1;
 }
@@ -219,25 +219,25 @@ select {
     }
 }
 
-.animate-row {
-    animation: row-animator linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 30%;
-}
+/*.animate-row {*/
+/*    animation: row-animator linear;*/
+/*    animation-timeline: view();*/
+/*    animation-range: entry 0% cover 30%;*/
+/*}*/
 
-@keyframes row-animator {
-    from {
-        opacity: 0;
-        scale: 0.99;
-        transform: translateY(3rem);
-    }
+/*@keyframes row-animator {*/
+/*    from {*/
+/*        opacity: 0;*/
+/*        scale: 0.99;*/
+/*        transform: translateY(3rem);*/
+/*    }*/
 
-    to {
-        opacity: 1;
-        scale: 1;
-        transform: translateX(0px);
-    }
-}
+/*    to {*/
+/*        opacity: 1;*/
+/*        scale: 1;*/
+/*        transform: translateX(0px);*/
+/*    }*/
+/*}*/
 
 .nav-container button:hover {
     transition-property: transform;
@@ -295,4 +295,15 @@ select {
 .right-round-full {
     margin-right: 0.3rem;
     border-radius: 0 1rem 1rem 0;
+}
+
+.footnote {
+    text-align: center;
+    font-family: "Edu NSW ACT Cursive", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: .3rem;
+    margin-bottom: .5rem;
+    user-select: none;
 }
