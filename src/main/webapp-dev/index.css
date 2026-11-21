@@ -307,3 +307,17 @@ select {
     margin-bottom: .5rem;
     user-select: none;
 }
+
+:root {
+    --chart-bg: transparent;
+    --chart-text: #222;
+    --chart-border: #888;
+    --chart-line: #888;
+}
+
+.dark {
+    --chart-bg: rgba(255,255,255,0.03);
+    --chart-text: #f1f5f9;
+    --chart-border: rgba(255,255,255,0.2);
+    --chart-line: rgba(255,255,255,0.35);
+}

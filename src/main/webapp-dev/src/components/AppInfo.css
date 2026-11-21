@@ -1,0 +1,73 @@
+
+.org-chart-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 16px;
+}
+
+.org-chart-canvas {
+    width: 1500px;
+    height: 720px;
+    background: transparent;
+}
+
+/* Department and company boxes */
+.org-node {
+    width: 190px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--chart-border, #888);
+    border-radius: 6px;
+
+    background: var(--chart-bg, transparent);
+    color: var(--chart-text, inherit);
+
+    font-size: 17px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.company-node {
+    width: 220px;
+    height: 90px;
+
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+/* Invisible junction nodes */
+.junction {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}
+
+/* Hide all connection handles */
+.org-node .react-flow__handle,
+.junction .react-flow__handle {
+    width: 1px;
+    height: 1px;
+    min-width: 1px;
+    min-height: 1px;
+    border: none;
+    opacity: 0;
+    background: transparent;
+}
+
+/* Remove default React Flow background */
+.org-chart-canvas .react-flow__pane {
+    cursor: default;
+}
+
+.org-chart-canvas .react-flow__node {
+    cursor: default;
+}
