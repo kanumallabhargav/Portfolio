@@ -1,3 +1,4 @@
+import AppInfo from "./AppInfo";
 import PlayGround from "./PlayGround";
 import Profile from "./Profile";
 import StatsContainer from "./StatsContainer";
@@ -8,7 +9,8 @@ export default function ContentHelper({selectedTopic}) {
         profile: <Profile />,
         tenure: <Tenure />,
         stats: <StatsContainer />,
-        playGround: <PlayGround />
+        playGround: <PlayGround />,
+        appInfo: <AppInfo />
     };
 
     return components[selectedTopic];
