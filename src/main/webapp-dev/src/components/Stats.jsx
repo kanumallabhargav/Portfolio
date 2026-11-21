@@ -1,6 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { IconBarsDownArrow, IconBarsUpArrow, IconDoubleArrows } from '../assets/static/Icons';
+import {
+    IconBarsDownArrow,
+    IconBarsUpArrow,
+    IconDoubleArrows,
+    IconActions,
+    IconComment,
+    IconEdit,
+    IconDelete
+} from '../assets/static/Icons';
 import { useTheme } from "../context/ThemeContext";
 import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
@@ -20,10 +28,11 @@ export default function Stats() {
         gain: "",
         spent: "",
         protein: "",
-        statDate: ""
+        statDate: "",
+        comments: ""
     });
-    const {theme} = useTheme();
-    const {accentColor} = useAccentColor();
+    const { theme } = useTheme();
+    const { accentColor } = useAccentColor();
     const accent = accentColors[accentColor][theme];
 
     useEffect(() => {
@@ -78,7 +87,8 @@ export default function Stats() {
                 gain: Number(formData.gain),
                 spent: Number(formData.spent),
                 protein: Number(formData.protein),
-                statDate: formData.statDate
+                statDate: formData.statDate,
+                comments: formData.comments
             }
         );
 
@@ -87,6 +97,7 @@ export default function Stats() {
             spent: "",
             protein: "",
             statDate: "",
+            comments: "",
         });
 
         setRefresh(refresh + 1);
@@ -145,6 +156,8 @@ export default function Stats() {
                 return 'Net Gain';
             case 'totalDeficit':
                 return 'Total Deficit';
+            case 'comments':
+                return 'Comments';
         }
     }
 
@@ -191,6 +204,7 @@ export default function Stats() {
                             className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold`}
                             required
                         />
+
                         <button
                             type="submit"
                             className={`
@@ -201,30 +215,48 @@ export default function Stats() {
                             before:transition-all before:duration-100 
                             hover:shadow-[${accent.accent}]/50 hover:before:left-0 
                             hover:before:w-full
+                            row-span-2
                             `}>
                             Save
                         </button>
+                        <input
+                            type="text"
+                            name="comments"
+                            placeholder="Comments"
+                            value={formData.comments}
+                            onChange={handleChange}
+                            className={`rounded bg-[${accent.foreground}] text-[${accent.text}] placeholder:text-[${accent.text}] p-3 font-semibold col-span-4`}
+                            required
+                        />
                     </div>
                 </form>
                 <div className="grid grid-cols-1 gap-2 text-center shadow-xl">
-                    <div className={`grid grid-cols-6 bg-[${accent.header}] py-2`}>
-                        {["statDate", "gain", "spent", "protein", "netGain", "totalDeficit"].map((key) => (
-                            <th key={key} className={`border-x grid xl:grid-cols-4 lg:grid-cols-3 text-[${accent.text}]`}>
-                                <span className="col-span-1 pl-4">
-                                    {getSortArrow(key)}
-                                </span>
-                                <button
-                                    type="button"
-                                    className="col-span-2"
-                                    onClick={() => handleSort(key)}>
-                                    <span className="font-medium">
-                                        {resolveCase(key)}
-                                    </span>
-                                </button>
+                    <div className={`grid grid-cols-7 bg-[${accent.header}] py-2`}>
+                        {["statDate", "gain", "spent", "protein", "netGain", "totalDeficit", "comments"].map((key) => (
+                            <th key={key}
+                                className={`border-x grid xl:grid-cols-4 lg:grid-cols-3 text-[${accent.text}]`}>
+                                {key === "comments" ?
+                                    <div className="justify-items-center col-span-4"><IconActions theme={accent.text} />
+                                    </div> :
+                                    (<>
+                                        <span className="col-span-1 pl-4">
+                                            {getSortArrow(key)}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="col-span-2"
+                                            onClick={() => handleSort(key)}>
+                                            <span className="font-medium">
+                                                {resolveCase(key)}
+                                            </span>
+                                        </button>
+                                    </>)
+                                }
                             </th>
                         ))}
                     </div>
-                    {sortedStats.map((stat) => (<div key={stat.id} className={`grid grid-cols-6 even:bg-[${accent.foreground}] even:py-1 odd:bg-[${accent.background}]/50 animate-row text-[${accent.text}]`}>
+                    {sortedStats.map((stat) => (<div key={stat.id}
+                        className={`grid grid-cols-7 even:bg-[${accent.foreground}] even:py-1 odd:bg-[${accent.background}]/50 animate-row text-[${accent.text}]`}>
                         <div className="grid grid-cols-2 text-center">
                             <div className="text-right pr-3">
                                 {new Date(stat.statDate).toLocaleDateString("en-US", {
@@ -245,6 +277,24 @@ export default function Stats() {
                         <p>{stat.protein}</p>
                         <p>{stat.netGain}</p>
                         <p>{stat.totalDeficit}</p>
+                        <div className="flex justify-center gap-4">
+                            <div className="relative group inline-block">
+                                <button className="">
+                                    <IconComment theme={accent.text} />
+                                </button>
+                                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
+                                            px-3 py-2 rounded-lg
+                                          bg-gray-900 text-white text-xs whitespace-nowrap
+                                            opacity-0 invisible
+                                            group-hover:opacity-100 group-hover:visible
+                                            transition-all duration-200
+                                            pointer-events-none">
+                                    {stat.comments === null ? 'No Comments' : stat.comments}
+                                </span>
+                            </div>
+                            <button><IconEdit theme={accent.text} /></button>
+                            <button><IconDelete theme={accent.text} /></button>
+                        </div>
                     </div>
                     ))}
                     <div className={`grid grid-cols-6 bg-[${accent.header}] py-2`}>
@@ -259,21 +309,24 @@ export default function Stats() {
                 </div>
             </div>
             <div className="grid grid-cols-3 mt-12 gap-3">
-                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
+                <div
+                    className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
                     <p className={`text-center text-[${accent.text}]/70 text-xl`}>Total Fat Loss</p>
                     <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {history.tfl}
                     </p>
                     <p className={`text-center text-sm text-[${accent.text}]/70`}>kCal</p>
                 </div>
-                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
+                <div
+                    className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
                     <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Loss</p>
                     <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {history.cl}
                     </p>
                     <p className={`text-center text-sm text-[${accent.text}]/70`}>kg</p>
                 </div>
-                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
+                <div
+                    className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl my-animation`}>
                     <p className={`text-center text-[${accent.text}]/70 text-xl`}>Adjusted Loss</p>
                     <p className={`text-center text-5xl text-[${accent.text}]`}>
                         {calcLoss}

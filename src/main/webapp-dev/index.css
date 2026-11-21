@@ -148,9 +148,10 @@ select {
 .box {
     height: 200px;
     width: 200px;
-    background: red;
+    background: blue;
+    filter: blur(20px);
 
-    animation: first-animation 0.5s ease-out infinite alternate forwards paused;
+    animation: first-animation 0.3s ease-out infinite alternate forwards paused;
 }
 
 .box:hover {
@@ -159,11 +160,11 @@ select {
 
 @keyframes first-animation {
     from {
-        transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg) scale(1);
     }
 
     to {
-        transform: translateY(-100px) rotate(135deg);
+        transform: translateY(-100px) rotate(135deg) scale(2);
     }
 }
 
@@ -320,4 +321,34 @@ select {
     --chart-text: #f1f5f9;
     --chart-border: rgba(255,255,255,0.2);
     --chart-line: rgba(255,255,255,0.35);
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: #222;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+
+    font-size: 12px;
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.tooltip-container:hover .tooltip-text {
+    opacity: 1;
+    visibility: visible;
 }

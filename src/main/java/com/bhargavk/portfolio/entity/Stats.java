@@ -36,4 +36,7 @@ public class Stats {
 
     @Column(name = "total_deficit")
     private Integer totalDeficit;
+
+    @Column(name = "comments")
+    private String comments;
 }

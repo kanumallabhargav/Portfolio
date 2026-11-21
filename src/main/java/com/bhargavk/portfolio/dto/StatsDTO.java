@@ -11,7 +11,8 @@ public record StatsDTO(
         Integer protein,
         Integer netGain,
         Integer totalDeficit,
-        LocalDate statDate
+        LocalDate statDate,
+        String comments
 
 
 ) {
@@ -23,7 +24,8 @@ public record StatsDTO(
                 stats.getProtein(),
                 stats.getNetGain(),
                 stats.getTotalDeficit(),
-                stats.getStatDate()
+                stats.getStatDate(),
+                stats.getComments()
         );
     }
 }

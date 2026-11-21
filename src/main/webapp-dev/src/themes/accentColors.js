@@ -112,22 +112,22 @@ const accentColors = {
     teal: {
         name: 'Teal',
         swatchHead: 'bg-[#91B3B9]',
-        swatchTail: 'bg-[#071C27]',
+        swatchTail: 'bg-[#07202B]',
         light: {
             background: '#DCD9E8',
             foreground: '#91B3B9',
-            text: '#071C27',
-            accent: '#071C27',
+            text: '#07202B',
+            accent: '#07202B',
             header: '#DCD9E8',
             textInvert: '#91B3B9',
         },
         dark: {
             background: '#123747',
-            foreground: '#071C27',
+            foreground: '#07202B',
             text: '#91B3B9',
             accent: '#91B3B9',
             header: '#123747',
-            textInvert: '#071C27',
+            textInvert: '#07202B',
         },
     },
 
