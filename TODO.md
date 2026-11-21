@@ -14,3 +14,4 @@
 - BugFix: row-animator
 - ~~New tab button: App Info~~
 - ~~Comments for stats~~
+- ~~Save success/failure - toast message~~
