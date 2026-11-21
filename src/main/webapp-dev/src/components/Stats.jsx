@@ -7,11 +7,13 @@ import {
     IconActions,
     IconComment,
     IconEdit,
-    IconDelete
+    IconDelete,
+    IconSuccess
 } from '../assets/static/Icons';
 import { useTheme } from "../context/ThemeContext";
 import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
+import { themeSelector } from "../themes/themeSelector";
 
 export default function Stats() {
 
@@ -20,6 +22,7 @@ export default function Stats() {
     const [rowCount, setRowCount] = useState(0)
     const [calcLoss, setCalcLoss] = useState(0);
     const [history, setHistory] = useState([]);
+    const [showToast, setShowToast] = useState(false);
     const [sortConfig, setSortConfig] = useState({
         key: "statDate",
         direction: "asc",
@@ -34,6 +37,7 @@ export default function Stats() {
     const { theme } = useTheme();
     const { accentColor } = useAccentColor();
     const accent = accentColors[accentColor][theme];
+    const styles = themeSelector(theme);
 
     useEffect(() => {
         axios
@@ -101,6 +105,12 @@ export default function Stats() {
         });
 
         setRefresh(refresh + 1);
+
+        setShowToast(true);
+
+        setTimeout(() => {
+            setShowToast(false);
+        }, 3000);
     };
 
     const handleSort = (key) => {
@@ -163,6 +173,22 @@ export default function Stats() {
 
     return (
         <div className="select-none">
+            <div
+                className={`
+                    fixed top-5 left-1/2 -translate-x-1/2 z-50
+                    px-6 py-3 rounded-xl shadow-lg
+                    bg-[${accent.background}] text-[${accent.text}]
+                    transition-all duration-500 ease-in-out
+                    ${showToast
+                        ? "translate-y-0 opacity-100"
+                        : "-translate-y-20 opacity-0 pointer-events-none"
+                    }
+                `}
+            >
+                <p className="text-sm font-medium flex gap-2">
+                    <span> <IconSuccess theme={styles.success} /> </span>Stats Updated!
+                </p>
+            </div>
             <div className="grid grid-cols-1 gap-4">
                 <p className={`text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-[${accent.foreground}] to-transparent`}>Stats</p>
                 <form onSubmit={handleSubmit}>

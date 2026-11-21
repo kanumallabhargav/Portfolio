@@ -13,6 +13,7 @@ export default function PlayGround() {
   const { accentColor } = useAccentColor();
   const accent = accentColors[accentColor][theme];
   const [selected, setSelected] = useState();
+  const [showToast, setShowToast] = useState(false);
 
 
   useEffect(() => {
@@ -24,8 +25,22 @@ export default function PlayGround() {
     });
   }, []);
 
+  const displayToast = () => {
+        setShowToast(true);
+
+        setTimeout(() => {
+            setShowToast(false);
+        }, 2000);
+    };
+
   return (
     <>
+    <button
+                onClick={displayToast}
+                className="px-4 py-2 rounded-lg bg-blue-600 text-white"
+            >
+                Show Toast
+            </button>
       <div className="text-white border-amber-400/70 border-2 rounded-xl p-5">
         <h1 className="text-4xl mb-5">This is the Playground</h1>
         <div className="box mb-5"></div>
@@ -1050,6 +1065,26 @@ export default function PlayGround() {
         Click here to save your changes
     </span>
 </div>
+      </div>
+      <div className="mt-12 bg-zinc-600">
+        <div
+                className={`
+                    fixed top-5 left-1/2 -translate-x-1/2 z-50
+                    px-6 py-3 rounded-xl shadow-lg
+                    bg-gray-900 text-white
+                    transition-all duration-500 ease-in-out
+                    ${showToast
+                        ? "translate-y-0 opacity-100"
+                        : "-translate-y-20 opacity-0 pointer-events-none"
+                    }
+                `}
+            >
+                <p className="text-sm font-medium">
+                    Your changes have been saved!
+                </p>
+            </div>
+
+            
       </div>
     </>
   )
