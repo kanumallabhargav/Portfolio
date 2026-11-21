@@ -13,4 +13,4 @@
 - ~~BugFix: Form submit button text color~~
 - BugFix: row-animator
 - ~~New tab button: App Info~~
-- Comments for stats
+- ~~Comments for stats~~
