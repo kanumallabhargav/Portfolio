@@ -8,7 +8,8 @@ import {
     IconComment,
     IconEdit,
     IconDelete,
-    IconSuccess
+    IconSuccess,
+    IconFailure
 } from '../assets/static/Icons';
 import { useTheme } from "../context/ThemeContext";
 import { useAccentColor } from "../context/AccentColorContext";
@@ -23,6 +24,7 @@ export default function Stats() {
     const [calcLoss, setCalcLoss] = useState(0);
     const [history, setHistory] = useState([]);
     const [showToast, setShowToast] = useState(false);
+    const [saveSuccess, setSaveSuccess] = useState();
     const [sortConfig, setSortConfig] = useState({
         key: "statDate",
         direction: "asc",
@@ -85,32 +87,37 @@ export default function Stats() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await axios.post(
-            "http://localhost:8080/api/stats/add",
-            {
-                gain: Number(formData.gain),
-                spent: Number(formData.spent),
-                protein: Number(formData.protein),
-                statDate: formData.statDate,
-                comments: formData.comments
-            }
-        );
+        try {
+            await axios.post(
+                "http://localhost:8080/api/stats/add",
+                {
+                    gain: Number(formData.gain),
+                    spent: Number(formData.spent),
+                    protein: Number(formData.protein),
+                    statDate: formData.statDate,
+                    comments: formData.comments
+                }
+            );
 
-        setFormData({
-            gain: "",
-            spent: "",
-            protein: "",
-            statDate: "",
-            comments: "",
-        });
+            setFormData({
+                gain: "",
+                spent: "",
+                protein: "",
+                statDate: "",
+                comments: "",
+            });
 
-        setRefresh(refresh + 1);
-
-        setShowToast(true);
-
-        setTimeout(() => {
-            setShowToast(false);
-        }, 3000);
+            setRefresh(prev => prev + 1);
+            setSaveSuccess(true);
+        } catch (error) {
+            setSaveSuccess(false);
+            console.error("Error saving stats:", error);
+        } finally {
+            setShowToast(true);
+            setTimeout(() => {
+                setShowToast(false);
+            }, 4000);
+        }
     };
 
     const handleSort = (key) => {
@@ -185,8 +192,17 @@ export default function Stats() {
                     }
                 `}
             >
-                <p className="text-sm font-medium flex gap-2">
-                    <span> <IconSuccess theme={styles.success} /> </span>Stats Updated!
+                <p className="text-sm font-medium flex gap-2 items-center">
+                    <span> {
+                        saveSuccess ?
+                            <IconSuccess theme={styles.success} /> :
+                            <IconFailure theme={styles.danger} />
+                    }
+                    </span>
+                    {
+                        saveSuccess ? `Stats Updated!` :
+                            `Failed to update stats`
+                    }
                 </p>
             </div>
             <div className="grid grid-cols-1 gap-4">
@@ -234,10 +250,10 @@ export default function Stats() {
                         <button
                             type="submit"
                             className={`
-                            text-[${accent.text}] hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
-                            border-[${accent.accent}]/40 rounded px-3 text-slate-300 shadow-sm transition-all 
+                            text-[${styles.success}] hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
+                            border-[${styles.success}]/40 rounded px-3 text-slate-300 shadow-sm transition-all 
                             before:absolute before:bottom-0 before:left-0 before:top-0 
-                            before:z-0 before:h-full before:w-0 before:bg-[${accent.accent}]/40
+                            before:z-0 before:h-full before:w-0 before:bg-[${styles.success}]/40
                             before:transition-all before:duration-100 
                             hover:shadow-[${accent.accent}]/50 hover:before:left-0 
                             hover:before:w-full

@@ -5,6 +5,7 @@ import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
+import { IconSuccess, IconFailure } from "../assets/static/Icons";
 
 export default function PlayGround() {
   const { theme } = useTheme();
@@ -30,7 +31,7 @@ export default function PlayGround() {
 
         setTimeout(() => {
             setShowToast(false);
-        }, 2000);
+        }, 4000);
     };
 
   return (
@@ -1071,7 +1072,7 @@ export default function PlayGround() {
                 className={`
                     fixed top-5 left-1/2 -translate-x-1/2 z-50
                     px-6 py-3 rounded-xl shadow-lg
-                    bg-gray-900 text-white
+                    bg-[${accent.background}] text-[${accent.text}]
                     transition-all duration-500 ease-in-out
                     ${showToast
                         ? "translate-y-0 opacity-100"
@@ -1079,8 +1080,9 @@ export default function PlayGround() {
                     }
                 `}
             >
-                <p className="text-sm font-medium">
-                    Your changes have been saved!
+                <p className="text-sm font-medium flex gap-2 items-center">
+                    {/* <span> <IconSuccess theme={styles.success} /> </span>Stats Updated! */}
+                    <span> <IconFailure theme={styles.danger} /> </span>Failed to Update Stats
                 </p>
             </div>
 
