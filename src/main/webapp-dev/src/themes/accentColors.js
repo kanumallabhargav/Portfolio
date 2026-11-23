@@ -240,6 +240,72 @@ const accentColors = {
             textInvert: '#2B0505',
         },
     },
+
+    fableGold: {
+        name: 'Fable Gold',
+        swatchHead: 'bg-[#FFFFFF]',
+        swatchTail: 'bg-[#F6C84B]',
+        light: {
+            background: '#FFFFFF',
+            foreground: '#D9D9D9',
+            text: '#1A1A1A',
+            accent: '#F6C84B',
+            header: '#FFFFFF',
+            textInvert: '#FFFFFF',
+        },
+        dark: {
+            background: '#1A1A1A',
+            foreground: '#0B0B0B',
+            text: '#D9D9D9',
+            accent: '#F6C84B',
+            header: '#1A1A1A',
+            textInvert: '#0B0B0B',
+        },
+    },
+
+    schafterPurple: {
+        name: 'Schafter Purple',
+        swatchHead: 'bg-[#2D2B55]',
+        swatchTail: 'bg-[#F4A62A]',
+        light: {
+            background: '#E8DDEB',
+            foreground: '#B09BB8',
+            text: '#17121F',
+            accent: '#F4A62A',
+            header: '#E8DDEB',
+            textInvert: '#B09BB8',
+        },
+        dark: {
+            background: '#302538',
+            foreground: '#17121F',
+            text: '#B09BB8',
+            accent: '#F4A62A',
+            header: '#302538',
+            textInvert: '#17121F',
+        },
+    },
+
+    LitmusGreen: {
+        name: 'Litmus Green',
+        swatchHead: 'bg-[#0F3D3E]',
+        swatchTail: 'bg-[#C6601F]',
+        light: {
+            background: '#DAF1DE',
+            foreground: '#8EB69B',
+            text: '#051F20',
+            accent: '#C6601F',
+            header: '#DAF1DE',
+            textInvert: '#8EB69B',
+        },
+        dark: {
+            background: '#0B2B26',
+            foreground: '#051F20',
+            text: '#8EB69B',
+            accent: '#C6601F',
+            header: '#0B2B26',
+            textInvert: '#051F20',
+        },
+    },
 };
 
 export default accentColors;

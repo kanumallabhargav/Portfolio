@@ -15,3 +15,4 @@
 - ~~New tab button: App Info~~
 - ~~Comments for stats~~
 - ~~Save success/failure - toast message~~
+- ~~BugFix: stats table last column too wide. Other cols clipping content~~
