@@ -20,7 +20,6 @@ export default function Stats() {
 
     const [stats, setStats] = useState([]);
     const [refresh, setRefresh] = useState(1);
-    const [rowCount, setRowCount] = useState(0)
     const [calcLoss, setCalcLoss] = useState(0);
     const [history, setHistory] = useState([]);
     const [showToast, setShowToast] = useState(false);
@@ -46,7 +45,6 @@ export default function Stats() {
             .get("http://localhost:8080/api/stats/list")
             .then((response) => {
                 setStats(response.data);
-                setRowCount(response.data.length)
             })
             .catch((error) => {
                 console.error(error);
@@ -251,11 +249,11 @@ export default function Stats() {
                             type="submit"
                             className={`
                             text-[${styles.success}] hover:before:bg-redborder-red-500 relative overflow-hidden border font-semibold 
-                            border-[${styles.success}]/40 rounded px-3 text-slate-300 shadow-sm transition-all 
+                            border-[${styles.success}]/40 rounded px-3 shadow-sm transition-all 
                             before:absolute before:bottom-0 before:left-0 before:top-0 
                             before:z-0 before:h-full before:w-0 before:bg-[${styles.success}]/40
                             before:transition-all before:duration-100 
-                            hover:shadow-[${accent.accent}]/50 hover:before:left-0 
+                            hover:shadow-[${accent.text}]/50 hover:before:left-0 
                             hover:before:w-full
                             row-span-2
                             `}>
@@ -276,7 +274,7 @@ export default function Stats() {
                     <div className={`grid grid-cols-7 bg-[${accent.header}] py-2`}>
                         {["statDate", "gain", "spent", "protein", "netGain", "totalDeficit", "comments"].map((key) => (
                             <th key={key}
-                                className={`border-x grid xl:grid-cols-4 lg:grid-cols-3 text-[${accent.text}]`}>
+                                className={`border-x grid xl:grid-cols-4 lg:grid-cols-3 text-[${accent.text}] text-sm`}>
                                 {key === "comments" ?
                                     <div className="justify-items-center col-span-4"><IconActions theme={accent.text} />
                                     </div> :
@@ -298,7 +296,7 @@ export default function Stats() {
                         ))}
                     </div>
                     {sortedStats.map((stat) => (<div key={stat.id}
-                        className={`grid grid-cols-7 even:bg-[${accent.foreground}] even:py-1 odd:bg-[${accent.background}]/50 animate-row text-[${accent.text}]`}>
+                        className={`grid grid-cols-7 text-sm even:bg-[${accent.foreground}] even:py-1 odd:bg-[${accent.background}]/50 animate-row text-[${accent.text}]`}>
                         <div className="grid grid-cols-2 text-center">
                             <div className="text-right pr-3">
                                 {new Date(stat.statDate).toLocaleDateString("en-US", {
@@ -321,7 +319,7 @@ export default function Stats() {
                         <p>{stat.totalDeficit}</p>
                         <div className="flex justify-center gap-4">
                             <div className="relative group inline-block">
-                                <button className="">
+                                <button className="align-middle">
                                     <IconComment theme={accent.text} />
                                 </button>
                                 <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
@@ -339,13 +337,15 @@ export default function Stats() {
                         </div>
                     </div>
                     ))}
-                    <div className={`grid grid-cols-6 bg-[${accent.header}] py-2`}>
+                    <div className={`grid grid-cols-7 bg-[${accent.header}] py-2 text-sm`}>
                         <p className="border-r">Date</p>
                         <p className="border-r">Gain</p>
                         <p className="border-r">Spent</p>
                         <p className="border-r">Protein</p>
                         <p className="border-r">Net Gain</p>
                         <p>Total Deficit</p>
+                        <div className="justify-items-center"><IconActions theme={accent.text} />
+                                    </div>
 
                     </div>
                 </div>
