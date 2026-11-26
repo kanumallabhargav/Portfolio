@@ -47,7 +47,7 @@ public class ChartsController {
     }
 
     @GetMapping("/last-thirty-days")
-    public List<LastThirtyDaysSpends> getPreviousThirtyDatsSpent() {
+    public List<LastThirtyDaysSpendsDTO> getPreviousThirtyDatsSpent() {
         return chartsService.getAllOneMonthSpends();
     }
 }

@@ -1,6 +1,8 @@
 package com.bhargavk.portfolio.controller;
 
+import com.bhargavk.portfolio.dto.CurrentWeekGainsDTO;
 import com.bhargavk.portfolio.dto.CurrentWeekProgressDTO;
+import com.bhargavk.portfolio.dto.CurrentWeekSpendsDTO;
 import com.bhargavk.portfolio.entity.WeeklyStats;
 import com.bhargavk.portfolio.service.ReportsService;
 import com.bhargavk.portfolio.util.Constants;
@@ -37,6 +39,20 @@ public class ReportsController {
                         currentWeekProgressStats.get(Constants.REMAINING_GAIN),
                         currentWeekProgressStats.get(Constants.DAILY_LIMIT)
                 )
+        );
+    }
+
+    @GetMapping("/current-week/gains")
+    public ResponseEntity<List<CurrentWeekGainsDTO>> getCurrentWeekGains() {
+        return ResponseEntity.ok().body(
+                reportsService.getCurrentWeekGains()
+        );
+    }
+
+    @GetMapping("/current-week/spends")
+    public ResponseEntity<List<CurrentWeekSpendsDTO>> getCurrentWeekSpends() {
+        return ResponseEntity.ok().body(
+                reportsService.getCurrentWeekSpends()
         );
     }
 }
