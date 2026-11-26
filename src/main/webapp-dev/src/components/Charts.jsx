@@ -1,7 +1,6 @@
 import DeficitTrendChart from './DeficitTrendChart'
 import GainSpendChart from './GainSpendChart'
 import NetGainChart from './NetGainChart'
-import TflGoalChart from './TflGoalChart'
 import LastThirtyDaysSpends from './LastThirtyDaysSpends'
 import { useTheme } from '../context/ThemeContext'
 import { useAccentColor } from '../context/AccentColorContext'
@@ -21,10 +20,11 @@ export default function Charts() {
             </div>
             <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-[${accent.text}]`}>Deficit Trends</p>
             <div className="mb-5 rounded-xl pt-4 pr-4 shadow-md">
-                <DeficitTrendChart theme={accent.text}/>
+                <DeficitTrendChart />
             </div>
             <div className='grid grid-cols-2'>
-                <div className="grid grid-cols-1 pl-3">
+                {/* Phased out TFL Goal chart */}
+                {/* <div className="grid grid-cols-1 pl-3">
                     <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-[${accent.text}]`}>Total Loss Goal</p>
                     <div className='mb-4 rounded-xl pt- pr-4 shadow-md mr-5 max-w-md'>
                         <TflGoalChart />
@@ -33,8 +33,8 @@ export default function Charts() {
                         <p className="text-left"><span className='bg-[#F56527] px-2.5 mr-2 rounded-full'></span>Remaining</p>
                     </div>
                     </div>
-                </div>
-                <div className="grid grid-cols-1">
+                </div> */}
+                <div className="grid grid-cols-1 col-span-2">
                     <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit mb-2 border-l-red-400/40 shadow-md mt-12 text-[${accent.text}]`}>Net Gain per Day</p>
                     <div className='mb-4 rounded-xl pt-24 px-3 shadow-md'>
                         <NetGainChart theme={accent.text}/>

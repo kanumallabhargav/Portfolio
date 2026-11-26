@@ -5,7 +5,7 @@ import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
-import { IconSuccess, IconFailure } from "../assets/static/Icons";
+import { IconSuccess, IconFailure, IconCalc } from "../assets/static/Icons";
 
 export default function PlayGround() {
   const { theme } = useTheme();
@@ -27,21 +27,21 @@ export default function PlayGround() {
   }, []);
 
   const displayToast = () => {
-        setShowToast(true);
+    setShowToast(true);
 
-        setTimeout(() => {
-            setShowToast(false);
-        }, 4000);
-    };
+    setTimeout(() => {
+      setShowToast(false);
+    }, 4000);
+  };
 
   return (
     <>
-    <button
-                onClick={displayToast}
-                className="px-4 py-2 rounded-lg bg-blue-600 text-white"
-            >
-                Show Toast
-            </button>
+      <button
+        onClick={displayToast}
+        className="px-4 py-2 rounded-lg bg-blue-600 text-white"
+      >
+        Show Toast
+      </button>
       <div className="text-white border-amber-400/70 border-2 rounded-xl p-5">
         <h1 className="text-4xl mb-5">This is the Playground</h1>
         <div className="box mb-5"></div>
@@ -439,7 +439,7 @@ export default function PlayGround() {
         </div>
       </div>
 
-{/* ---------------------------------------------------------------------------------------------- */}
+      {/* ---------------------------------------------------------------------------------------------- */}
 
       <p className="text-white bg-black mt-24 py-2 pl-2">Reassigned</p>
       <div className="grid grid-cols-7 mt-2">
@@ -509,7 +509,7 @@ export default function PlayGround() {
           <div className="block-second" style={{ backgroundColor: '#7DA0CA' }}></div>
           <div className="block-second" style={{ backgroundColor: '#C1E8FF' }}></div>
         </div>
-        
+
 
         <div className="grid grid-cols-1">
           <p className="text-white bg-black py-2 pl-2">Blue 2</p>
@@ -532,7 +532,7 @@ export default function PlayGround() {
           <div className="block-second" style={{ backgroundColor: '#DCD9E8' }}></div>
         </div>
 
-      
+
 
         <div className="grid grid-cols-1">
           <p className="text-white bg-black py-2 pl-2">Teal 2</p>
@@ -558,7 +558,7 @@ export default function PlayGround() {
 
 
 
-    
+
         <div className="grid grid-cols-1">
           <p className="text-white bg-black py-2 pl-2">Lime</p>
           <div className="block-second" style={{ backgroundColor: '#0E1F08' }}></div>
@@ -568,7 +568,7 @@ export default function PlayGround() {
           <div className="block-second" style={{ backgroundColor: '#A4E75A' }}></div>
           <div className="block-second" style={{ backgroundColor: '#E2F7C2' }}></div>
         </div>
-      
+
 
         <div className="grid grid-cols-1">
           <p className="text-white bg-black py-2 pl-2">Crimson 2</p>
@@ -581,7 +581,7 @@ export default function PlayGround() {
         </div>
 
 
-  
+
         <div className="grid grid-cols-1">
           <p className="text-white bg-black py-2 pl-2">Brown</p>
           <div className="block-second" style={{ backgroundColor: '#211713' }}></div>
@@ -591,7 +591,7 @@ export default function PlayGround() {
           <div className="block-second" style={{ backgroundColor: '#D0A98B' }}></div>
           <div className="block-second" style={{ backgroundColor: '#F0DFCE' }}></div>
         </div>
-            
+
 
 
 
@@ -607,7 +607,7 @@ export default function PlayGround() {
 
 
 
-{/* ----------------------------- */}
+        {/* ----------------------------- */}
         <div className="grid grid-cols-1">
           <p className="text-white bg-black py-2 pl-2">Red</p>
           <div className="block-second" style={{ backgroundColor: '#2B0505' }}></div>
@@ -617,9 +617,9 @@ export default function PlayGround() {
           <div className="block-second" style={{ backgroundColor: '#F26A6D' }}></div>
           <div className="block-second" style={{ backgroundColor: '#FDECEE' }}></div>
         </div>
-{/* ----------------------------- */}
+        {/* ----------------------------- */}
 
-        
+
       </div>
 
       <div className="h-6 w-6 grid grid-cols-2 mt-24 rotate-45">
@@ -703,7 +703,7 @@ export default function PlayGround() {
           </div>
         </div>
 
-        
+
 
         {/* Palate - Purple */}
         <div className="grid grid-cols-2 border p-2 gap-2">
@@ -850,7 +850,7 @@ export default function PlayGround() {
         </div>
 
 
-        {/* Palate - Green*/} 
+        {/* Palate - Green*/}
         <div className="grid grid-cols-2 border p-2 gap-2">
           <div className="col-span-2 text-center text-white font-semibold">
             <p>Green</p>
@@ -886,7 +886,7 @@ export default function PlayGround() {
         </div>
 
 
-        {/* Palate - Lime */} 
+        {/* Palate - Lime */}
         <div className="grid grid-cols-2 border p-2 gap-2">
           <div className="col-span-2 text-center text-white font-semibold">
             <p>Lime</p>
@@ -923,7 +923,7 @@ export default function PlayGround() {
 
 
 
-        {/* Palate - Brown */} 
+        {/* Palate - Brown */}
         <div className="grid grid-cols-2 border p-2 gap-2">
           <div className="col-span-2 text-center text-white font-semibold">
             <p>Brown</p>
@@ -959,7 +959,7 @@ export default function PlayGround() {
         </div>
 
 
-        {/* Palate - Yellow */} 
+        {/* Palate - Yellow */}
         <div className="grid grid-cols-2 border p-2 gap-2">
           <div className="col-span-2 text-center text-white font-semibold">
             <p>Yellow</p>
@@ -995,7 +995,7 @@ export default function PlayGround() {
         </div>
 
 
-        {/* Palate - Crimson */} 
+        {/* Palate - Crimson */}
         <div className="grid grid-cols-2 border p-2 gap-2">
           <div className="col-span-2 text-center text-white font-semibold">
             <p>Crimson</p>
@@ -1038,23 +1038,23 @@ export default function PlayGround() {
 
       <div className="mt-12 border-2 backdrop-blur-3xl">
         <DayPicker
-        animate
-        mode="single"
-        selected={selected}
-        onSelect={setSelected}
-        footer={
-          selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
-        }
+          animate
+          mode="single"
+          selected={selected}
+          onSelect={setSelected}
+          footer={
+            selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
+          }
         />
       </div>
 
       <div className="bg-black">
         <div className="relative group inline-block">
-    <button className="px-4 py-2 rounded-lg bg-blue-500 text-white">
-        Save
-    </button>
+          <button className="px-4 py-2 rounded-lg bg-blue-500 text-white">
+            Save
+          </button>
 
-    <span className="
+          <span className="
         absolute bottom-full left-1/2 -translate-x-1/2 mb-2
         px-3 py-2 rounded-lg
         bg-gray-900 text-white text-xs whitespace-nowrap
@@ -1063,30 +1063,40 @@ export default function PlayGround() {
         transition-all duration-200
         pointer-events-none
     ">
-        Click here to save your changes
-    </span>
-</div>
+            Click here to save your changes
+          </span>
+        </div>
       </div>
       <div className="mt-12 bg-zinc-600">
         <div
-                className={`
+          className={`
                     fixed top-5 left-1/2 -translate-x-1/2 z-50
                     px-6 py-3 rounded-xl shadow-lg
                     bg-[${accent.background}] text-[${accent.text}]
                     transition-all duration-500 ease-in-out
                     ${showToast
-                        ? "translate-y-0 opacity-100"
-                        : "-translate-y-20 opacity-0 pointer-events-none"
-                    }
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-20 opacity-0 pointer-events-none"
+            }
                 `}
-            >
-                <p className="text-sm font-medium flex gap-2 items-center">
-                    {/* <span> <IconSuccess theme={styles.success} /> </span>Stats Updated! */}
-                    <span> <IconFailure theme={styles.danger} /> </span>Failed to Update Stats
-                </p>
-            </div>
+        >
+          <p className="text-sm font-medium flex gap-2 items-center">
+            {/* <span> <IconSuccess theme={styles.success} /> </span>Stats Updated! */}
+            <span> <IconFailure theme={styles.danger} /> </span>Failed to Update Stats
+          </p>
+        </div>
+      </div>
 
-            
+      <div className="button-container2 flex gap-2">
+        <button className="button-shadow px-5 py-2 rounded-full text-white ">Hello</button>
+        <button className="button-shadow2 px-5 py-2 rounded-full text-white">Hello</button>
+      </div>
+
+      <div className="mt-12">
+        <DayPicker />
+      </div>
+      <div className="mt-12">
+        <button className="custom-shadow-one p-4 rounded-xl"><IconCalc theme={accent.accent}/></button>
       </div>
     </>
   )
