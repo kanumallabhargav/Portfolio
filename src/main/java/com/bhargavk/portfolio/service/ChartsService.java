@@ -20,8 +20,8 @@ import java.util.List;
 public class ChartsService {
     private final StatsRepository statsRepository;
 
-    public List<DeficitTrendDTO> getDeficitTrends() {
-        List<GainSpendTrendDTO> rawGains = statsRepository.getGainSpendTrendData(LocalDate.of(2026, 8, 1));
+    public List<DeficitTrendDTO> getDeficitTrends(LocalDate startDate) {
+        List<GainSpendTrendDTO> rawGains = statsRepository.getGainSpendTrendData(startDate);
         List<DeficitTrendDTO> deficitTrendDTOS = new ArrayList<>();
 
         for (int i = 0; i <= rawGains.size() - 1; i++) {
@@ -31,8 +31,8 @@ public class ChartsService {
         return deficitTrendDTOS;
     }
 
-    public List<GainSpendTrendDTO> getGainSpendTrendData() {
-        return statsRepository.getGainSpendTrendData(LocalDate.of(2026, 8, 1));
+    public List<GainSpendTrendDTO> getGainSpendTrendData(LocalDate startDate) {
+        return statsRepository.getGainSpendTrendData(startDate);
     }
 
     public int getTflValue() {
@@ -52,8 +52,8 @@ public class ChartsService {
         return requiredIntake - (totalGains - totalSpent);
     }
 
-    public List<NetGainChartDTO> calcNetGains() {
-        List<GainSpendTrendDTO> trends = statsRepository.getGainSpendTrendData(LocalDate.of(2026, 8, 1));
+    public List<NetGainChartDTO> calcNetGains(LocalDate startDate) {
+        List<GainSpendTrendDTO> trends = statsRepository.getGainSpendTrendData(startDate);
 
         List<NetGainChartDTO> toReturn = new ArrayList<>();
         for (int i = 0; i <= trends.size() - 1; i++) {
