@@ -1,5 +1,7 @@
 package com.bhargavk.portfolio.service;
 
+import com.bhargavk.portfolio.dto.CurrentWeekGainsDTO;
+import com.bhargavk.portfolio.dto.CurrentWeekSpendsDTO;
 import com.bhargavk.portfolio.entity.WeeklyStats;
 import com.bhargavk.portfolio.repository.StatsRepository;
 import com.bhargavk.portfolio.repository.WeeklyStatsRepository;
@@ -11,8 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @Service
@@ -28,10 +32,10 @@ public class ReportsService {
 
         List<Integer> maxCounterValue = weeklyStatsRepository.getLastUpdatedWeek();
 
-        if(maxCounterValue.getFirst()!=null &&
-                DateUtils.getCurrentWeek() > maxCounterValue.getFirst()+1) {
+        if (maxCounterValue.getFirst() != null &&
+                DateUtils.getCurrentWeek() > maxCounterValue.getFirst() + 1) {
 
-            if(!statsRepository.getLastUpdatedDate().equals(DateUtils.yesterday())) {
+            if (!statsRepository.getLastUpdatedDate().equals(DateUtils.yesterday())) {
                 log.warn("Yesterday's stats are not updated.");
                 log.warn("Update yesterday's stats and restart the application.");
                 return;
@@ -40,10 +44,10 @@ public class ReportsService {
             log.info("Updating weekly stats now...");
 
             WeeklyStats weeklyStats = new WeeklyStats();
-            Map<String, String> requiredWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentWeek()-1);
+            Map<String, String> requiredWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentWeek() - 1);
 
             //Set all values
-            weeklyStats.setWeek(DateUtils.getCurrentWeek()-1);
+            weeklyStats.setWeek(DateUtils.getCurrentWeek() - 1);
             weeklyStats.setStartDate(LocalDate.parse(requiredWeekDates.get(Constants.MONDAY)));
             weeklyStats.setEndDate(LocalDate.parse(requiredWeekDates.get(Constants.SUNDAY)));
             weeklyStats.setTotalGain(statsRepository.getWeeklyGain(weeklyStats.getStartDate()));
@@ -52,7 +56,7 @@ public class ReportsService {
             weeklyStats.setWeeklyLoss((double) statsRepository.getWeeklyDeficit(weeklyStats.getStartDate()) / Constants.KILO_CALS);
 
             weeklyStatsRepository.save(weeklyStats);
-            log.info("Stats updated for week: {}", DateUtils.getCurrentWeek()-1);
+            log.info("Stats updated for week: {}", DateUtils.getCurrentWeek() - 1);
             return;
         }
         log.info("Skipping weekly stat update...");
@@ -68,7 +72,7 @@ public class ReportsService {
         LocalDate startDate = LocalDate.parse(requiredWeekDates.get(Constants.MONDAY));
 
         int currentDividend = statsRepository.getCurrentWeekDividend(startDate);
-        int currentLimit = (Constants.WEEKLY_LIMIT/7) * currentDividend;
+        int currentLimit = (Constants.WEEKLY_LIMIT / 7) * currentDividend;
         int currentGain = statsRepository.getWeeklyGain(startDate) == null ? 0 : statsRepository.getWeeklyGain(startDate);
         int remainingGain = Constants.WEEKLY_LIMIT - currentGain;
 
@@ -77,12 +81,41 @@ public class ReportsService {
         currentWeekProgressMap.put(Constants.GAIN_LIMIT, currentDividend == 0 ? 1714 : currentLimit);
         currentWeekProgressMap.put(Constants.CURRENT_SPENT, currentDividend == 0 ? 0 : statsRepository.getWeeklySpent(startDate));
         currentWeekProgressMap.put(Constants.REMAINING_GAIN, remainingGain);
-        currentWeekProgressMap.put(Constants.DAILY_LIMIT, currentDividend == 0 ? 1714 : remainingGain/calculateDenominator(currentDividend));
+        currentWeekProgressMap.put(Constants.DAILY_LIMIT, currentDividend == 0 ? 1714 : remainingGain / calculateDenominator(currentDividend));
 
         return currentWeekProgressMap;
     }
 
     private int calculateDenominator(int currentDividend) {
         return currentDividend == 7 ? 1 : 7 - currentDividend;
+    }
+
+    public List<CurrentWeekGainsDTO> getCurrentWeekGains() {
+        Map<String, String> requiredWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentWeek());
+        LocalDate startDate = LocalDate.parse(requiredWeekDates.get(Constants.MONDAY));
+
+        return statsRepository.getCurrentWeekGains(startDate)
+                .stream()
+                .map(s -> new CurrentWeekGainsDTO(
+                        s.statDate().getDayOfWeek()
+                                .getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
+                        s.gain()
+                ))
+                .toList();
+
+    }
+
+    public List<CurrentWeekSpendsDTO> getCurrentWeekSpends() {
+        Map<String, String> requiredWeekDates = DateUtils.getWeekInfo(DateUtils.getCurrentWeek());
+        LocalDate startDate = LocalDate.parse(requiredWeekDates.get(Constants.MONDAY));
+
+        return statsRepository.getCurrentWeekSpends(startDate)
+                .stream()
+                .map(s -> new CurrentWeekSpendsDTO(
+                        s.statDate().getDayOfWeek()
+                                .getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
+                        s.spent()
+                ))
+                .toList();
     }
 }

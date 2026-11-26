@@ -1,7 +1,6 @@
 package com.bhargavk.portfolio.repository;
 
-import com.bhargavk.portfolio.dto.GainSpendTrendDTO;
-import com.bhargavk.portfolio.dto.LastThirtyDaysSpends;
+import com.bhargavk.portfolio.dto.*;
 import com.bhargavk.portfolio.entity.Stats;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -56,5 +55,21 @@ public interface StatsRepository extends JpaRepository<Stats, Long> {
     LocalDate getLastUpdatedDate();
 
     @Query("SELECT s.statDate, s.spent FROM Stats s WHERE s.statDate >= :weekDate")
-    List<LastThirtyDaysSpends> getAllSpent(@Param("weekDate") LocalDate weekDate);
+    List<LastThirtyDaysSpendsDTO> getAllSpent(@Param("weekDate") LocalDate weekDate);
+
+    @Query("""
+            SELECT new com.bhargavk.portfolio.dto.CurrentWeekGainsProjection(s.statDate, s.gain)
+            FROM Stats s
+            WHERE s.statDate >= :weekDate
+            ORDER BY s.statDate
+            """)
+    List<CurrentWeekGainsProjection> getCurrentWeekGains(@Param("weekDate") LocalDate weekDate);
+
+    @Query("""
+            SELECT new com.bhargavk.portfolio.dto.CurrentWeekSpendsProjection(s.statDate, s.spent)
+            FROM Stats s
+            WHERE s.statDate >= :weekDate
+            ORDER BY s.statDate
+            """)
+    List<CurrentWeekSpendsProjection> getCurrentWeekSpends(@Param("weekDate") LocalDate weekDate);
 }

@@ -16,16 +16,19 @@ import {
     ResponsiveContainer,
     Line,
     ReferenceLine,
-    LineChart
+    LineChart,
+    ComposedChart
 } from "recharts";
 
 
 export default function Reports() {
     const [weeklyStats, setWeeklyStats] = useState([]);
     const [currentWeekProgress, setCurrentWeekProgress] = useState([]);
-    const {theme} = useTheme();
+    const [currentWeekGains, setCurrentWeekGains] = useState([]);
+    const [currentWeekSpends, setCurrentWeekSpends] = useState([]);
+    const { theme } = useTheme();
     const styles = themeSelector(theme);
-    const {accentColor} = useAccentColor();
+    const { accentColor } = useAccentColor();
     const accent = accentColors[accentColor][theme];
 
     useEffect(() => {
@@ -50,6 +53,28 @@ export default function Reports() {
             })
     }, [])
 
+    useEffect(() => {
+        axios
+            .get("http://localhost:8080/api/reports/current-week/gains")
+            .then((response) => {
+                setCurrentWeekGains(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }, [])
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8080/api/reports/current-week/spends")
+            .then((response) => {
+                setCurrentWeekSpends(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }, [])
+
     const GAIN_THRESHOLD = 12000;
 
     return (
@@ -58,30 +83,30 @@ export default function Reports() {
                 <p className={`text-left border-l-4 pl-2 border-l-red-400/40 text-4xl bg-gradient-to-r py-2 from-[${accent.foreground}] to-transparent mb-5`}>Weekly Metrics</p>
                 <div className="grid grid-cols-4 mb-3 gap-2">
                     <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Gain / Limit</p>
-                    <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? `text-[${styles.danger}]` : `text-[${styles.success}]`} animate animate-pulse hover:animate-none`}>
-                        {currentWeekProgress.currentGain}
-                    </p>
-                    <p className={`text-center text-sm text-[${accent.text}]/70 mt-1`}>{currentWeekProgress.gainLimit}</p>
-                </div>
-                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Spent</p>
-                    <p className={`text-center text-4xl text-[${accent.text}]`}>
-                        {currentWeekProgress.currentSpent}
-                    </p>
-                </div>
-                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Remaining Gain</p>
-                    <p className={`text-center text-4xl text-[${accent.text}]`}>
-                        {currentWeekProgress.remainingGain}
-                    </p>
-                </div>
-                <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
-                    <p className={`text-center text-[${accent.text}]/70 text-xl`}>Daily Limit</p>
-                    <p className={`text-center text-4xl text-[${accent.text}]`}>
-                        {currentWeekProgress.dailyLimit}
-                    </p>
-                </div>
+                        <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Gain / Limit</p>
+                        <p className={`text-center text-4xl ${currentWeekProgress.currentGain > currentWeekProgress.gainLimit ? `text-[${styles.danger}]` : `text-[${styles.success}]`} animate animate-pulse hover:animate-none`}>
+                            {currentWeekProgress.currentGain}
+                        </p>
+                        <p className={`text-center text-sm text-[${accent.text}]/70 mt-1`}>{currentWeekProgress.gainLimit}</p>
+                    </div>
+                    <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
+                        <p className={`text-center text-[${accent.text}]/70 text-xl`}>Current Spent</p>
+                        <p className={`text-center text-4xl text-[${accent.text}]`}>
+                            {currentWeekProgress.currentSpent}
+                        </p>
+                    </div>
+                    <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
+                        <p className={`text-center text-[${accent.text}]/70 text-xl`}>Remaining Gain</p>
+                        <p className={`text-center text-4xl text-[${accent.text}]`}>
+                            {currentWeekProgress.remainingGain}
+                        </p>
+                    </div>
+                    <div className={`grid grid-cols-1 font-semibold bg-[${accent.foreground}] py-5 rounded-lg shadow-2xl`}>
+                        <p className={`text-center text-[${accent.text}]/70 text-xl`}>Daily Limit</p>
+                        <p className={`text-center text-4xl text-[${accent.text}]`}>
+                            {currentWeekProgress.dailyLimit}
+                        </p>
+                    </div>
                 </div>
                 <div className={`grid grid-cols-5 font-semibold bg-[${accent.foreground}] py-2 gap-2`}>
                     <p className="border-r">Week</p>
@@ -158,7 +183,7 @@ export default function Reports() {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Weekly Loss Distribution</p>
+                <p className={`border-l-2 mt-8 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Weekly Loss Distribution</p>
                 <div className="rounded-xl pt-4 pr-4 shadow-md">
                     <LineChart
                         style={{ width: '100%', maxHeight: '30vh', aspectRatio: 1.618 }}
@@ -176,7 +201,7 @@ export default function Reports() {
                         <YAxis width="auto" />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="weeklyLoss" strokeDasharray="2 2" stroke={accent.text}/>
+                        <Line type="monotone" dataKey="weeklyLoss" strokeDasharray="2 2" stroke={accent.text} />
                         <RechartsDevtools />
                     </LineChart>
                 </div>
@@ -227,9 +252,55 @@ export default function Reports() {
                             <YAxis width="auto" />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="totalSpent" strokeDasharray="2 2" stroke={accent.text}/>
+                            <Line type="monotone" dataKey="totalSpent" strokeDasharray="2 2" stroke={accent.text} />
                             <RechartsDevtools />
                         </LineChart>
+                    </div>
+                    <div className="rounded-xl pt-4 pr-4 shadow-md">
+                        <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Current Week Gains</p>
+                        <ComposedChart
+                            style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
+                            responsive
+                            data={currentWeekGains}
+                            margin={{
+                                top: 20,
+                                right: 0,
+                                bottom: 0,
+                                left: 0,
+                            }}
+                        >
+                            <CartesianGrid stroke={accent.accent} />
+                            <XAxis dataKey="day" scale="band" />
+                            <YAxis label={{ value: 'Gain', angle: -90, position: 'insideLeft' }} width="auto" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="gain" barSize={20} fill={accent.accent} />
+                            <Line type="monotone" dataKey="gain" stroke={accent.accent} />
+                            <RechartsDevtools />
+                        </ComposedChart>
+                    </div>
+                    <div className={`rounded-xl pt-4 pr-4 shadow-md`}>
+                        <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Current Week Spends</p>
+                        <ComposedChart
+                            style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
+                            responsive
+                            data={currentWeekSpends}
+                            margin={{
+                                top: 20,
+                                right: 0,
+                                bottom: 0,
+                                left: 0,
+                            }}
+                        >
+                            <CartesianGrid stroke={accent.accent} />
+                            <XAxis dataKey="day" scale="band"/>
+                            <YAxis label={{ value: 'Spent', angle: -90, position: 'insideLeft'}} width="auto" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="spent" barSize={30} fill={accent.accent} />
+                            <Line type="monotone" dataKey="spent" stroke={accent.accent} />
+                            <RechartsDevtools />
+                        </ComposedChart>
                     </div>
                 </div>
             </div>

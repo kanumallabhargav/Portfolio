@@ -2,7 +2,7 @@ package com.bhargavk.portfolio.service;
 
 import com.bhargavk.portfolio.dto.DeficitTrendDTO;
 import com.bhargavk.portfolio.dto.GainSpendTrendDTO;
-import com.bhargavk.portfolio.dto.LastThirtyDaysSpends;
+import com.bhargavk.portfolio.dto.LastThirtyDaysSpendsDTO;
 import com.bhargavk.portfolio.dto.NetGainChartDTO;
 import com.bhargavk.portfolio.repository.StatsRepository;
 import com.bhargavk.portfolio.util.DateUtils;
@@ -67,7 +67,7 @@ public class ChartsService {
         return toReturn;
     }
 
-    public List<LastThirtyDaysSpends> getAllOneMonthSpends() {
+    public List<LastThirtyDaysSpendsDTO> getAllOneMonthSpends() {
         return statsRepository.getAllSpent(DateUtils.thirtyDaysAgo());
     }
 }
