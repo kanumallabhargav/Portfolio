@@ -352,3 +352,10 @@ select {
         -8px -8px 20px rgba(255, 255, 255, 0.7),
         8px 8px 20px rgba(163, 177, 198, 0.4);
 }
+
+.inset-shadow {
+    box-shadow: 
+    inset 0 -6px 6px -6px rgba(0, 0, 0, 0.25),
+    inset -5px 0 6px -6px rgba(0, 0, 0, 0.25),
+    inset 5px 0 6px -6px rgba(0, 0, 0, 0.25); 
+}
