@@ -16,3 +16,4 @@
 - ~~Comments for stats~~
 - ~~Save success/failure - toast message~~
 - ~~BugFix: stats table last column too wide. Other cols clipping content~~
+- Research: FlyWay for DB scripts

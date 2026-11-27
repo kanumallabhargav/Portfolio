@@ -6,10 +6,11 @@ import axios from "axios";
 import accentColors from '../themes/accentColors';
 import { useTheme } from '../context/ThemeContext';
 import { useAccentColor } from '../context/AccentColorContext';
+import { getDateMinusDays } from '../util/dateUtils';
 
 const GainSpendChart = () => {
     const [gsData, setGsData] = useState([]);
-    const [gainSpendStartDate, setGainSpendStartDate] = useState('2026-09-01');
+    const [gainSpendStartDate, setGainSpendStartDate] = useState(getDateMinusDays());
     const { theme } = useTheme();
     const { accentColor } = useAccentColor();
     const accent = accentColors[accentColor][theme];
@@ -31,14 +32,14 @@ const GainSpendChart = () => {
 
     return (
         <>
-            <div className='flex flex-col px-12 mb-5 shadow-md rounded-xl py-5 w-fit'>
+            <div className={`flex flex-col ml-3 px-2 mb-5 inset-shadow rounded-b-[2rem] py-2 w-fit bg-[${accent.background}]/20`}>
                 <p className={`text-[${accent.text}] mb-2 font-semibold`}>Start Date</p>
                 <input
                     type="date"
                     name="statDate"
                     value={gainSpendStartDate}
                     onChange={handleSelectedDate}
-                    className={`rounded bg-[${accent.foreground}] text-[${accent.text}] p-3 font-semibold`}
+                    className={`rounded-[2rem] bg-[${accent.foreground}] text-[${accent.text}] p-3 font-semibold `}
                     required
                 />
             </div>

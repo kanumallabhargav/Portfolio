@@ -77,6 +77,18 @@ export default function Reports() {
 
     const GAIN_THRESHOLD = 12000;
 
+    const averageSpent = currentWeekSpends.length > 0
+                         ? currentWeekSpends.reduce(
+                            (total, item) => total + item.spent, 0
+                         ) / currentWeekSpends.length
+                         : 0;
+
+    const averageGain = currentWeekGains.length > 0
+                         ? currentWeekGains.reduce(
+                            (total, item) => total + item.gain, 0
+                         ) / currentWeekGains.length
+                         : 0;                         
+
     return (
         <>
             <div className="text-center">
@@ -257,7 +269,10 @@ export default function Reports() {
                         </LineChart>
                     </div>
                     <div className="rounded-xl pt-4 pr-4 shadow-md">
-                        <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Current Week Gains</p>
+                        <div className="flex justify-between items-center">
+                            <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Current Week Gains</p>
+                            <p>Average: <span className="font-semibold">{averageGain}</span></p>
+                        </div>
                         <ComposedChart
                             style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
                             responsive
@@ -280,7 +295,10 @@ export default function Reports() {
                         </ComposedChart>
                     </div>
                     <div className={`rounded-xl pt-4 pr-4 shadow-md`}>
-                        <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Current Week Spends</p>
+                        <div className="flex justify-between items-center">
+                            <p className={`border-l-2 px-4 ml-4 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Current Week Spends</p>
+                            <p>Average: <span className="font-semibold">{averageSpent}</span></p>
+                        </div>
                         <ComposedChart
                             style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
                             responsive

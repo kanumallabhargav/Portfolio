@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
-import { themeSelector } from "../themes/themeSelector";
 import { useAccentColor } from "../context/AccentColorContext";
 import accentColors from "../themes/accentColors";
 import { RechartsDevtools } from '@recharts/devtools';
@@ -18,7 +17,6 @@ import {
 export default function LastThirtyDaysSpends() {
     const [spentData, setSpentData] = useState([]);
     const { theme } = useTheme();
-    const styles = themeSelector(theme);
     const { accentColor } = useAccentColor();
     const accent = accentColors[accentColor][theme];
 
@@ -34,8 +32,7 @@ export default function LastThirtyDaysSpends() {
     }, []);
 
     return (
-        <div className="grid grid-cols-1 mt-12">
-            <p className={`border-l-2 px-4 ml-4 mb-5 font-semibold bg-[${accent.foreground}] w-fit py-2 rounded-full h-fit border-l-red-400/40 shadow-md text-[${accent.text}]`}>Spent Distribution</p>
+        <div className="grid grid-cols-1">
             <LineChart
                 style={{ width: '100%', maxHeight: '40vh', aspectRatio: 1.618 }}
                 responsive
